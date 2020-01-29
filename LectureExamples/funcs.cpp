@@ -25,6 +25,9 @@ void printstring(const string &s) {
 int main() {
   int x = 12;
 
+  addOne(x);
+  cout << x << endl;
+
   x = addOneV2(x);
   cout << x << endl;
 
@@ -32,5 +35,5 @@ int main() {
   cout << x << endl;
 
   string a = "hi";
-  printstring("hi");
+  printstring(a);
 }
