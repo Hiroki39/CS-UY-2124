@@ -1,11 +1,11 @@
 cmake_minimum_required (VERSION 2.8)
 
-project (LectureExamples)
+project (Lab)
 
 add_compile_options(-std=c++11)
 
 
-# Find all cpp files and store in list mains
+# Find all main*.cpp files and store in list mains
 file(GLOB_RECURSE mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 foreach(mainfile IN LISTS mains)
     # Get file name without directory
