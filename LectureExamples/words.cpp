@@ -10,6 +10,8 @@ struct Word {
 };
 
 int main() {
+  string token;
+  ifstream ifs("input.txt");
   while (ifs >> token) {
     // Have I seen the token
 
