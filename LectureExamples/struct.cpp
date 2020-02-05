@@ -1,5 +1,5 @@
 /*
-  struct.cpp;
+  struct.cpp
   Sec C, Feb 3, 2020
   --Hongyi Zheng
 */

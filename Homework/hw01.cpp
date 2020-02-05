@@ -1,4 +1,9 @@
-// decrypt texts encrypted by classic Caesar cypher algorithm
+/*
+  hw01.cpp
+  Sec C, Feb 4,2020
+  Hongyi Zheng
+  Decrypts texts encrypted with classic Caesar cypher algorithm
+*/
 #include <fstream>
 #include <iostream>
 #include <string>
