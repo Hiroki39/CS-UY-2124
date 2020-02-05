@@ -16,7 +16,7 @@ struct Motorcycle {
 };
 
 // void displayBike(Motorcycle aBike)
-// void displayBike(Motorcycle& aBike)
+// void displayBike(Motorcycle &aBike)
 void displayBike(const Motorcycle &aBike);          // prototype
 void displayBikes(const vector<Motorcycle> &bikes); // prototype
 
