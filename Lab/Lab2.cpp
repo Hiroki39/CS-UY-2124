@@ -7,9 +7,10 @@ using namespace std;
 struct Hydrocarbon {
   Hydrocarbon(int numofC, int numofH) : C(numofC), H(numofH) {} // constructor
 
-  // add name to the corresponding Hydrocarbon structure
+  // add name of a substance to the corresponding chemical formula
   void addname(const string &newName) { names.push_back(newName); }
 
+  // display the information of chemical formula
   void display() const {
     cout << "C" << C << "H" << H;
     for (const string &name : names) {
@@ -48,15 +49,15 @@ int main() {
   displayHCVector(hydrocarbons);
 }
 
-// read all names of formula into a vector containing Hydrocarbon structures
+// read all names of formula into a vector containing Hydrocarbon data structure
 void fillHCVector(ifstream &HCStream, vector<Hydrocarbon> &hydrocarbons) {
   int H, C;
   string name;
   char skip;
 
   while (HCStream >> name >> skip >> C >> skip >> H) {
-    // try to add name to existing Hydrocarbon structure.
-    // If no existing hydrocarbon has the required number of C and H,
+    // try to add name of substance to an existing Hydrocarbon data structure.
+    // If no existing Hydrocarbon has the required number of H and C,
     // construct a new one.
     if (!addNametoHydrocarbon(name, H, C, hydrocarbons)) {
       Hydrocarbon new_hydrocarbon(C, H);
