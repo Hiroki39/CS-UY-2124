@@ -1,3 +1,9 @@
+/*
+  CS-2124 - Sec C
+  rec02.cpp
+  Hongyi Zheng
+ */
+
 #include <fstream>
 #include <iostream>
 #include <string>
