@@ -54,6 +54,7 @@ int main() {
       replaceWarrior(warrior1, warrior2, warriors);
     }
   }
+  warriorStream.close();
 }
 
 // try to open warriors.txt, output an error if failed to open it
@@ -92,7 +93,7 @@ Warrior searchWarrior(const string &name,
   }
 }
 
-// create a battle, modify strength of Warriors, adn output different messages
+// create a battle, modify strength of Warriors, and output different messages
 // in different cases
 void battle(Warrior &warrior1, Warrior &warrior2) {
   cout << warrior1.name << " battles " << warrior2.name << endl;
