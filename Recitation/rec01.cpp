@@ -4,7 +4,7 @@
 using namespace std;
 
 // display the values in a vector
-void display_vector(const vector<int> &v) {
+void display_vector(const vector<int>& v) {
   for (int value : v) {
     cout << value << " ";
   }
@@ -12,14 +12,14 @@ void display_vector(const vector<int> &v) {
 }
 
 // double the values in a vectors in two methods
-void double_val_in_vector1(vector<int> &v) {
+void double_val_in_vector1(vector<int>& v) {
   for (size_t i = 0; i < v.size(); i++) {
     v[i] *= 2;
   }
 }
 
-void double_val_in_vector2(vector<int> &v) {
-  for (int &value : v) {
+void double_val_in_vector2(vector<int>& v) {
+  for (int& value : v) {
     value *= 2;
   }
 }
@@ -29,7 +29,7 @@ int main() {
   std::cout << "hello, world!" << std::endl;
   cout << "hello, world!" << endl;
 
-  int x; // undefined variable
+  int x;  // undefined variable
   cout << "x(undefined): " << x << endl;
 
   // define y, z, pie and display their size

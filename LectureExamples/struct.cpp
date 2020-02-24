@@ -17,10 +17,10 @@ struct Motorcycle {
 
 // void displayBike(Motorcycle aBike)
 // void displayBike(Motorcycle &aBike)
-void displayBike(const Motorcycle &aBike);          // prototype
-void displayBikes(const vector<Motorcycle> &bikes); // prototype
+void displayBike(const Motorcycle& aBike);           // prototype
+void displayBikes(const vector<Motorcycle>& bikes);  // prototype
 
-void fillBikeVectorFromStream(ifstream &bikeStream, vector<Motorcycle> &bikes);
+void fillBikeVectorFromStream(ifstream& bikeStream, vector<Motorcycle>& bikes);
 
 int main() {
   /*
@@ -46,22 +46,22 @@ int main() {
   // for (size_t i = 0; i < bikes.size(); i++) {
   //   displayBike(bikes[i]);
   // }
-  for (const Motorcycle &aBike : bikes) {
+  for (const Motorcycle& aBike : bikes) {
     displayBike(aBike);
   }
 }
 
-void displayBike(const Motorcycle &aBike) {
+void displayBike(const Motorcycle& aBike) {
   cout << aBike.brand << ' ' << aBike.cc << ' ' << aBike.model;
 }
 
-void displayBikes(const vector<Motorcycle> &bikes) {
-  for (const Motorcycle &aBike : bikes) {
+void displayBikes(const vector<Motorcycle>& bikes) {
+  for (const Motorcycle& aBike : bikes) {
     displayBike(aBike);
   }
 }
 
-void fillBikeVectorFromStream(ifstream &bikeStream, vector<Motorcycle> &bikes) {
+void fillBikeVectorFromStream(ifstream& bikeStream, vector<Motorcycle>& bikes) {
   string brand, model;
   int cc;
   while (bikeStream >> brand >> cc >> model) {

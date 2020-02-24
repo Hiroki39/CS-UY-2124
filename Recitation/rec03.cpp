@@ -19,11 +19,11 @@ struct Account {
 // Account ADT
 class AccountV2 {
   // grant access to privte variables
-  friend ostream &operator<<(ostream &os, const AccountV2 &account);
+  friend ostream& operator<<(ostream& os, const AccountV2& account);
 
 public:
   // initialization list
-  AccountV2(const string &theName, int theAccountNumber)
+  AccountV2(const string& theName, int theAccountNumber)
       : name(theName), account_num(theAccountNumber), balance(0) {}
 
   // getter
@@ -52,7 +52,7 @@ private:
   // embedded Transaction class. Cannot be accessed from outside
   class Transaction {
   public:
-    Transaction(const string &theType, int theAmount)
+    Transaction(const string& theType, int theAmount)
         : type(theType), amount(theAmount) {}
 
   private:
@@ -67,13 +67,13 @@ private:
 };
 
 // prototypes
-void openFile(ifstream &fileStream, const string &filename);
-void displayAccountVector(const vector<Account> &accountVector);
-void displayAccountV2Vector(const vector<AccountV2> &accountVector);
-ostream &operator<<(ostream &os, const AccountV2 &account);
-void depositintoAccount(vector<AccountV2> &accountVector, int account_num,
+void openFile(ifstream& fileStream, const string& filename);
+void displayAccountVector(const vector<Account>& accountVector);
+void displayAccountV2Vector(const vector<AccountV2>& accountVector);
+ostream& operator<<(ostream& os, const AccountV2& account);
+void depositintoAccount(vector<AccountV2>& accountVector, int account_num,
                         int amount);
-void withdrawfromAccount(vector<AccountV2> &accountVector, int account_num,
+void withdrawfromAccount(vector<AccountV2>& accountVector, int account_num,
                          int amount);
 
 int main() {
@@ -155,7 +155,7 @@ int main() {
 
 // functions
 // try to open a specified file, output an error if failed to open it
-void openFile(ifstream &fileStream, const string &filename) {
+void openFile(ifstream& fileStream, const string& filename) {
   fileStream.clear();
   fileStream.open(filename);
   // check if the file is succesfully opened
@@ -166,16 +166,16 @@ void openFile(ifstream &fileStream, const string &filename) {
 }
 
 // display the information of all Account POD in the vector
-void displayAccountVector(const vector<Account> &accountVector) {
-  for (const Account &curr_account : accountVector) {
+void displayAccountVector(const vector<Account>& accountVector) {
+  for (const Account& curr_account : accountVector) {
     cout << "name: " << curr_account.name
          << " account number: " << curr_account.account_num << endl;
   }
 }
 
 // display the information of all Account ADT in the vector
-void displayAccountV2Vector(const vector<AccountV2> &accountVector) {
-  for (const AccountV2 &curr_account : accountVector) {
+void displayAccountV2Vector(const vector<AccountV2>& accountVector) {
+  for (const AccountV2& curr_account : accountVector) {
     //  cout << "name: " << curr_account.getName()
     //       << " account number: " << curr_account.getAccountNumber() << endl;
     cout << curr_account;
@@ -183,7 +183,7 @@ void displayAccountV2Vector(const vector<AccountV2> &accountVector) {
 }
 
 // operator overload
-ostream &operator<<(ostream &os, const AccountV2 &account) {
+ostream& operator<<(ostream& os, const AccountV2& account) {
   // os << "name: " << account.getName()
   //    << " account number: " << account.getAccountNumber() << endl;
   os << "name: " << account.name << " account number: " << account.account_num
@@ -193,9 +193,9 @@ ostream &operator<<(ostream &os, const AccountV2 &account) {
 
 // search for the account using account number, then call the deposit method of
 // Account
-void depositintoAccount(vector<AccountV2> &accountVector, int account_num,
+void depositintoAccount(vector<AccountV2>& accountVector, int account_num,
                         int amount) {
-  for (AccountV2 &curr_account : accountVector) {
+  for (AccountV2& curr_account : accountVector) {
     if (curr_account.getAccountNumber() == account_num) {
       curr_account.deposit(amount);
       return;
@@ -205,9 +205,9 @@ void depositintoAccount(vector<AccountV2> &accountVector, int account_num,
 
 // search for the account using account number, then call the withdrawal method
 // of Account
-void withdrawfromAccount(vector<AccountV2> &accountVector, int account_num,
+void withdrawfromAccount(vector<AccountV2>& accountVector, int account_num,
                          int amount) {
-  for (AccountV2 &curr_account : accountVector) {
+  for (AccountV2& curr_account : accountVector) {
     if (curr_account.getAccountNumber() == account_num) {
       curr_account.withdrawal(amount);
       return;

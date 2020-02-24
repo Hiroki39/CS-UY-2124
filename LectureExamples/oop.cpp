@@ -15,12 +15,12 @@ class Person {
   // in C++, methods first
 public:
   // Person() {} default constructor
-  Person() : name("fred"), age(17) {} // initialization list
+  Person() : name("fred"), age(17) {}  // initialization list
   /*
     constructor
     const makes it possible to accept literals and protect the input variables
   */
-  Person(const string &theName, int theAge) : name(theName), age(theAge) {
+  Person(const string& theName, int theAge) : name(theName), age(theAge) {
     // name = theName; not ideal
   }
   /*
@@ -35,7 +35,7 @@ private:
   // access aPerson.name outside the definition would result in error
 };
 
-void displayPerson(const Person &aPerson) {
+void displayPerson(const Person& aPerson) {
   // cout << "Person: " << name << endl;
   aPerson.display();
 }

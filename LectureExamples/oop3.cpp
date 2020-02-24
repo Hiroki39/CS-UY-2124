@@ -19,7 +19,7 @@ private:
 // struct makes everything public by default, class makes everything private
 class Person {
   // allow this function to access private variables
-  friend ostream &operator<<(ostream &os, const Person &somebody);
+  friend ostream& operator<<(ostream& os, const Person& somebody);
 
 public:
   /*
@@ -35,7 +35,7 @@ public:
     constructor
     const makes it possible to accept literals and protect the input variables
   */
-  Person(const string &theName, int m, int d, int y)
+  Person(const string& theName, int m, int d, int y)
       : name(theName), dob(m, d, y) {}
 
   void display() const {
@@ -49,13 +49,13 @@ private:
   Date dob;
 };
 
-void displayPerson(const Person &aPerson) {
+void displayPerson(const Person& aPerson) {
   // cout << "Person: " << name << endl;
   aPerson.display();
 }
 
 // operator overload
-ostream &operator<<(ostream &os, const Person &somebody) {
+ostream& operator<<(ostream& os, const Person& somebody) {
   os << "Person: " << somebody.name;
   return os;
 }
@@ -68,5 +68,5 @@ int main() {
   Person john("John", 7, 1, 1990);
   displayPerson(john);
   john.display();
-  cout << john; // operator<<(cout, john);
+  cout << john;  // operator<<(cout, john);
 }

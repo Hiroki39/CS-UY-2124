@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-  ifstream jab("jabberwocky"); // constructor
+  ifstream jab("jabberwocky");  // constructor
   if (!jab) {
     cerr << "failed to open jabberwocky";
     exit(1);

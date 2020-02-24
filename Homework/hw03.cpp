@@ -13,12 +13,12 @@ using namespace std;
 class Warrior {
   // class prototype to ensure defining of second friend funtion without error
   class Weapon;
-  friend ostream &operator<<(ostream &os, const Warrior &somewarrior);
-  friend ostream &operator<<(ostream &os, const Weapon &someweapon);
+  friend ostream& operator<<(ostream& os, const Warrior& somewarrior);
+  friend ostream& operator<<(ostream& os, const Weapon& someweapon);
 
 public:
   // initialization list
-  Warrior(const string &theName, const string &theWeapon, int theStrength)
+  Warrior(const string& theName, const string& theWeapon, int theStrength)
       : name(theName), weapon(theWeapon, theStrength) {}
 
   // getters and setters
@@ -28,7 +28,7 @@ public:
 
   // battle is now a method, instead of funtion
   // modify strength of Warriors, output different messages in different cases
-  void battle(Warrior &enemy) {
+  void battle(Warrior& enemy) {
     cout << name << " battles " << enemy.name << endl;
     if (getStrength() == 0 && enemy.getStrength() == 0) {
       cout << "Oh, NO! They're both dead! Yuck!" << endl;
@@ -36,7 +36,7 @@ public:
       cout << "He's dead, " << enemy.name << endl;
     } else if (getStrength() > 0 && enemy.getStrength() == 0) {
       cout << "He's dead, " << name << endl;
-    } else { // the strengths of both warriors are not 0
+    } else {  // the strengths of both warriors are not 0
       if (getStrength() == enemy.getStrength()) {
         setStrength(0);
         enemy.setStrength(0);
@@ -46,7 +46,7 @@ public:
         setStrength(getStrength() - enemy.getStrength());
         enemy.setStrength(0);
         cout << name << " defeats " << enemy.name << endl;
-      } else { // getStrength() < enemy.getStrength()
+      } else {  // getStrength() < enemy.getStrength()
         enemy.setStrength(enemy.getStrength() - getStrength());
         setStrength(0);
         cout << enemy.name << " defeats " << name << endl;
@@ -58,11 +58,11 @@ private:
   // nested private Weapon class
   class Weapon {
     // friend function for the Weapon class
-    friend ostream &operator<<(ostream &os, const Weapon &someweapon);
+    friend ostream& operator<<(ostream& os, const Weapon& someweapon);
 
   public:
     // initialization list
-    Weapon(const string &theName, int theStrength)
+    Weapon(const string& theName, int theStrength)
         : weapon_name(theName), strength(theStrength) {}
     int getStrength() const { return strength; }
     void setStrength(int theStrength) { strength = theStrength; }
@@ -78,16 +78,16 @@ private:
 };
 
 // function prototypes
-void openFile(ifstream &warriorStream);
-void displayWarriorVector(const vector<Warrior> &warriorVector);
-int searchWarrior(const string &name, const vector<Warrior> &warriorVector);
+void openFile(ifstream& warriorStream);
+void displayWarriorVector(const vector<Warrior>& warriorVector);
+int searchWarrior(const string& name, const vector<Warrior>& warriorVector);
 
 int main() {
   ifstream warriorStream;
   openFile(warriorStream);
 
-  vector<Warrior> warriors; // stores all Warrior structures
-  string command;           // read command key words from stream
+  vector<Warrior> warriors;  // stores all Warrior structures
+  string command;            // read command key words from stream
   // identify the command word and take different actions
   while (warriorStream >> command) {
     if (command == "Warrior") {
@@ -110,7 +110,7 @@ int main() {
   warriorStream.close();
 }
 
-void openFile(ifstream &warriorStream) {
+void openFile(ifstream& warriorStream) {
   warriorStream.clear();
   warriorStream.open("warriors.txt");
   // check if the file is succesfully opened
@@ -121,32 +121,32 @@ void openFile(ifstream &warriorStream) {
 }
 
 // show numbers and information of existing Warriors
-void displayWarriorVector(const vector<Warrior> &warriorVector) {
+void displayWarriorVector(const vector<Warrior>& warriorVector) {
   cout << "There are: " << warriorVector.size() << " warriors" << endl;
-  for (const Warrior &curr_warrior : warriorVector) {
+  for (const Warrior& curr_warrior : warriorVector) {
     cout << curr_warrior;
   }
 }
 
 // search corresponding Warrior by the name provided in a specified vector
 // and return its index in the vector
-int searchWarrior(const string &name, const vector<Warrior> &warriorVector) {
+int searchWarrior(const string& name, const vector<Warrior>& warriorVector) {
   for (size_t index = 0; index < warriorVector.size(); index++) {
     if (warriorVector[index].getName() == name) {
       return index;
     }
   }
-  return warriorVector.size(); // return size of vector if Warrior is not found
+  return warriorVector.size();  // return size of vector if Warrior is not found
 }
 
 // operator overload for Warrior
-ostream &operator<<(ostream &os, const Warrior &somewarrior) {
+ostream& operator<<(ostream& os, const Warrior& somewarrior) {
   os << "Warrior: " << somewarrior.name << ", " << somewarrior.weapon;
   return os;
 }
 
 // operator overload for Weapon
-ostream &operator<<(ostream &os, const Warrior::Weapon &someweapon) {
+ostream& operator<<(ostream& os, const Warrior::Weapon& someweapon) {
   os << "weapon: " << someweapon.weapon_name << ", " << someweapon.strength
      << endl;
   return os;

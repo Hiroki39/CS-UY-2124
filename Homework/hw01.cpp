@@ -15,14 +15,14 @@ char decrypt_char(char chr, int step) {
   if (chr >= 'a' && chr <= 'z') {
     chr -= step;
     if (chr < 'a') {
-      chr += 26; // wrap around
+      chr += 26;  // wrap around
     }
   }
   return chr;
 }
 
-void decrypt_string(string &input_str, int step) {
-  for (char &chr : input_str) {
+void decrypt_string(string& input_str, int step) {
+  for (char& chr : input_str) {
     chr = decrypt_char(chr, step);
   }
 }
@@ -38,10 +38,10 @@ int main() {
   string line;
   vector<string> lines;
   int step;
-  encrypted >> step; // read the  first integer into the variable 'step'
+  encrypted >> step;  // read the  first integer into the variable 'step'
 
   while (getline(encrypted, line)) {
-    lines.push_back(line); // read following lines into the vector
+    lines.push_back(line);  // read following lines into the vector
   }
   encrypted.close();
 

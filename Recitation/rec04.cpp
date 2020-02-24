@@ -23,28 +23,27 @@ class PlainOldClassV2 {
 public:
   PlainOldClassV2() : x(-72) {}
   int getX() const { return x; }
-  void setX(int x) { x = x; } // HMMMM???
+  void setX(int x) { x = x; }  // HMMMM???
 private:
   int x;
 };
 
 class Colour {
 public:
-  Colour(const string &name, unsigned r, unsigned g, unsigned b)
+  Colour(const string& name, unsigned r, unsigned g, unsigned b)
       : name(name), r(r), g(g), b(b) {}
   void display() const {
     cout << name << " (RBG: " << r << "," << g << "," << b << ")";
   }
 
 private:
-  string name;      // what we call this colour
-  unsigned r, g, b; // red/green/blue values for displaying
+  string name;       // what we call this colour
+  unsigned r, g, b;  // red/green/blue values for displaying
 };
 
 class SpeakerSystem {
 public:
   void vibrateSpeakerCones(unsigned signal) const {
-
     cout << "Playing: " << signal << "Hz sound..." << endl;
     cout << "Buzz, buzzy, buzzer, bzap!!!\n";
   }
@@ -52,14 +51,15 @@ public:
 
 class Amplifier {
 public:
-  void attachSpeakers(const SpeakerSystem &spkrs) {
+  void attachSpeakers(const SpeakerSystem& spkrs) {
     if (attachedSpeakers)
       cout << "already have speakers attached!\n";
     else
       attachedSpeakers = &spkrs;
   }
 
-  void detachSpeakers() { // should there be an "error" message if not attached?
+  void
+  detachSpeakers() {  // should there be an "error" message if not attached?
     attachedSpeakers = nullptr;
   }
 
@@ -71,33 +71,33 @@ public:
   }
 
 private:
-  const SpeakerSystem *attachedSpeakers =
-      nullptr; // the SpeakerSystem should not be affected by the Amplifier
+  const SpeakerSystem* attachedSpeakers =
+      nullptr;  // the SpeakerSystem should not be affected by the Amplifier
 };
 
 class Person {
 public:
-  Person(const string &name) : name(name), roomie(nullptr) {}
-  void movesInWith(Person &newRoomate) {
+  Person(const string& name) : name(name), roomie(nullptr) {}
+  void movesInWith(Person& newRoomate) {
     if (!roomie && !newRoomate.roomie && this != &newRoomate) {
-      roomie = &newRoomate;     // now I have a new roomie
-      newRoomate.roomie = this; // and now they do too
+      roomie = &newRoomate;      // now I have a new roomie
+      newRoomate.roomie = this;  // and now they do too
     }
   }
-  const string &getName() const { return name; }
+  const string& getName() const { return name; }
   // Don't need to use getName() below, just there for you to use in debugging.
-  const string &getRoomiesName() const { return roomie->getName(); }
+  const string& getRoomiesName() const { return roomie->getName(); }
 
 private:
   string name;
-  Person *roomie;
+  Person* roomie;
 };
 
 int main() {
   int x;
   x = 10;
   cout << "x = " << x << endl;
-  int *p;
+  int* p;
   p = &x;
   // p = 0x0012fed4;
   cout << "p = " << p << endl;
@@ -120,13 +120,13 @@ int main() {
   cout << "*p now contains " << *p << endl;
   cout << "y now contains " << y << endl;
 
-  int *q;
+  int* q;
   q = p;
   cout << "q points to where " << *q << " is stored\n";
   cout << "*q contains " << *q << endl;
 
   double d(33.44);
-  double *pD(&d);
+  double* pD(&d);
   *pD = *p;
   *pD = 73.2343;
   *p = *pD;
@@ -136,7 +136,7 @@ int main() {
 
   int joe = 24;
   // const int sal = 19;
-  int *pI;
+  int* pI;
   pI = &joe;
   *pI = 234;
   // pI = &sal;
@@ -149,7 +149,7 @@ int main() {
   // *pcI = 7623;
 
   // int* const cpI;
-  int *const cpI(&joe);
+  int* const cpI(&joe);
   // int *const cpI(&sal);
   // cpI = &joe;
   *cpI = 234;
@@ -163,16 +163,16 @@ int main() {
   // cpcI = &sal;
   // *cpcI = 7623;
   Complex c = {11.23, 45.67};
-  Complex *pC(&c);
+  Complex* pC(&c);
   cout << "real: " << pC->real << "\nimaginary: " << pC->img << endl;
 
   PlainOldClass poc;
-  PlainOldClass *ppoc(&poc);
+  PlainOldClass* ppoc(&poc);
   cout << ppoc->getX() << endl;
   ppoc->setX(2837);
   cout << ppoc->getX() << endl;
 
-  int *pDyn = new int(3); // p points to an int initialized to 3 on the heap
+  int* pDyn = new int(3);  // p points to an int initialized to 3 on the heap
   *pDyn = 17;
 
   cout << "The " << *pDyn << " is stored at address " << pDyn
@@ -188,11 +188,11 @@ int main() {
   // double *pDouble = nullptr;
   // cout << "Can we dereference nullptr?  " << *pDyn << endl;
   // cout << "Can we dereference nullptr?  " << *pDouble << endl;
-  double *pTest = new double(12);
+  double* pTest = new double(12);
   delete pTest;
   pTest = nullptr;
-  delete pTest; // safe
-  short *pShrt = new short(5);
+  delete pTest;  // safe
+  short* pShrt = new short(5);
   delete pShrt;
   // delete pShrt;
   // long jumper = 12238743;
@@ -201,14 +201,14 @@ int main() {
   // delete ptrTolong;
   // Complex cmplx;
   // delete cmplx;
-  vector<Complex *> complV; // can hold pointers to Complex objects
-  Complex *tmpPCmplx;       // space for a Complex pointer
+  vector<Complex*> complV;  // can hold pointers to Complex objects
+  Complex* tmpPCmplx;       // space for a Complex pointer
   for (size_t ndx = 0; ndx < 3; ++ndx) {
-    tmpPCmplx = new Complex;     // create a new Complex object on the heap
-    tmpPCmplx->real = ndx;       // set real and img to be the
-    tmpPCmplx->img = ndx;        // value of the current ndx
-    complV.push_back(tmpPCmplx); // store the ADDRESS of the object in a vector
-                                 // or pointer to Complex
+    tmpPCmplx = new Complex;      // create a new Complex object on the heap
+    tmpPCmplx->real = ndx;        // set real and img to be the
+    tmpPCmplx->img = ndx;         // value of the current ndx
+    complV.push_back(tmpPCmplx);  // store the ADDRESS of the object in a vector
+                                  // or pointer to Complex
   }
   // display the objects using the pointers stored in the vector
   for (size_t ndx = 0; ndx < 3; ++ndx) {
@@ -222,7 +222,7 @@ int main() {
   // clear the vector
   complV.clear();
 
-  vector<Colour *> colours;
+  vector<Colour*> colours;
   string inputName;
   unsigned inputR, inputG, inputB;
 

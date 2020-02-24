@@ -8,17 +8,17 @@ public:
     cout << "Name: " << name;
     if (spouse != nullptr) {
       // cout << ", married to: " << (*spouse).name << endl;
-      cout << ", married to: " << spouse->name << endl; // a better approach
+      cout << ", married to: " << spouse->name << endl;  // a better approach
     }
   }
-  Person(const string &name) : name(name), spouse(nullptr) {}
+  Person(const string& name) : name(name), spouse(nullptr) {}
 
   // john.marries(mary)
-  bool marries(Person &betrothed) {
+  bool marries(Person& betrothed) {
     if (spouse == nullptr && betrothed.spouse == nullptr) {
       spouse = &betrothed;
       // privacy is to the type, not instance!
-      betrothed.spouse = this; // 'this' can only be used inside a method
+      betrothed.spouse = this;  // 'this' can only be used inside a method
       return true;
     }
     return false;
@@ -26,7 +26,7 @@ public:
 
 private:
   string name;
-  Person *spouse;
+  Person* spouse;
 };
 
 int main() {
@@ -38,12 +38,12 @@ int main() {
 
   int x = 17;
   // where is x?
-  cout << &x << endl; // address-of operator
-  int *p = &x;        // p is a pointer to int
+  cout << &x << endl;  // address-of operator
+  int* p = &x;         // p is a pointer to int
   cout << p << endl;
 
   // cout << x << endl;
-  cout << *p << endl; // dereference operator
+  cout << *p << endl;  // dereference operator
 
   *p = 42;
   cout << sizeof(p) << endl;
