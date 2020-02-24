@@ -1,3 +1,9 @@
+/*
+  hw02.cpp
+  Sec C, Feb 23,2020
+  Hongyi Zheng
+  Simulate battles between warriors
+*/
 #include <fstream>
 #include <iostream>
 #include <string>
