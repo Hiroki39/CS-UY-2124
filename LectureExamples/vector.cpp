@@ -1,25 +1,34 @@
+/*
+  Vector Class
+  Demonstrates:
+    Good example of copy control
+    Dynamic arrays and pointer arithmetic
+    Square bracket operator
+    Implementation of an important data structure
+*/
 #include <iostream>
-#include <vector>
 using namespace std;
 
-int main() {
-  // vector v1 for size 7 with every value equals to 42
-  vector<int> v1(7, 42);
-  vector<int> v;
-  cout << "v.size():" << v.size() << endl;
-
-  v.push_back(17);
-  v.push_back(42);
-  cout << "v.size():" << v.size() << endl;
-
-  // for (size_t i = 0; i < v.size(); ++i) {
-  //  cout << v[i] << ' ';
-  // }
-  for (int value : v) {
-    cout << value << ' ';
+class Vector {
+public:
+  Vector() : theSize(0), theCapacity(8), data(new int[theCapacity]) {}
+  // Vector(size_t size, int value = 0) {}
+  ~Vector() {
+    // delete data; this will only delete one integer!
+    delete[] data;
   }
-  cout << endl;
+  // Vector(const Vector& rhs)
+  // Vecyor& operator=(const Vector& rhs)
+  size_t size() const { return theSize; }
+  void clear() { theSize = 0; }
+  void pop_back() { theSize--; }
+  // Square brackets
+private:
+  size_t theSize;
+  size_t theCapacity;
+  int* data;
+};
 
-  v.clear();
-  cout << "v.size():" << v.size() << endl;
+int main() {
+  Vector v;  // not templated. Our vector can only hold ints.
 }

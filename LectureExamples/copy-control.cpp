@@ -13,6 +13,22 @@ public:
 
   // void cleanup() { delete p; }
   ~Thing() { delete p; }  // destructor
+
+  // operator overload (rhs = right hand side)
+  // return Thing to satisfy expression such as a = b = c
+  Thing& operator=(const Thing& rhs) {  // Thing& : return by reference!
+    // 0. Test for self-assigment
+    if (this != &rhs) {
+      // 1. Avoid memory leak. Free up resources. (destructor?)
+      delete p;
+    }
+    // 2. Allocate
+    // 3. Copy
+    p = new int(*rhs.p);
+    // return yourself
+    return *this;
+  }
+
 private:
   int* p;
 };
@@ -30,11 +46,17 @@ void simpleFunc() {
 
   Thing thing29(aThing);
   Thing thing30 = aThing;  // both making a copy
+
+  Thing someOtherThing(42);
+  // only make a shallow copy, so we need to overload "=" operator
+  // equivalent to: aThing.operator=(someOtherThing)
+  aThing = someOtherThing;
+  // note: assigment operator must be a method!
 }
 
 int main() { simpleFunc(); }
 
 ostream& operator<<(ostream& os, const Thing& rhs) {
-  os << *rhs.p;
+  os << *rhs.p << endl;
   return os;
 }
