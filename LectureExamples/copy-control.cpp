@@ -18,7 +18,7 @@ private:
 };
 
 void doNothing(Thing anotherThing) {
-  // void doNothing)const Thing& anootherThing
+  // void doNothing)const Thing& anotherThing
 }  // making a copy of anotherThing and destruct it after implementation
 
 void simpleFunc() {
