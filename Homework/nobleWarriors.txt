@@ -1,0 +1,29 @@
+Noble King_Arthur
+Noble Lancelot_du_Lac
+Noble Jim
+Noble Linus_Torvalds
+Noble Bill_Gates
+Warrior Tarzan 10
+Warrior Merlin 15
+Warrior Conan 12
+Warrior Spock 15
+Warrior Xena 20
+Warrior Hulk 8
+Warrior Hercules 3
+Hire Jim Spock
+Hire Lancelot_du_Lac Conan
+Hire King_Arthur Merlin
+Hire Lancelot_du_Lac Hercules
+Hire Linus_Torvalds Xena
+Hire Bill_Gates Hulk
+Hire King_Arthur Tarzan
+Status
+Fire King_Arthur Tarzan
+Status
+Battle King_Arthur Lancelot_du_Lac
+Battle Jim Lancelot_du_Lac
+Battle Linus_Torvalds Bill_Gates
+Battle Bill_Gates Lancelot_du_Lac
+Status
+Clear
+Status

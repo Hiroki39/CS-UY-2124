@@ -1,5 +1,5 @@
 /*
-  hw02.cpp
+  hw03.cpp
   Sec C, Feb 23,2020
   Hongyi Zheng
   Simulate battles between warriors
