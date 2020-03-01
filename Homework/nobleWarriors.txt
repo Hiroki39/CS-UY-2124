@@ -17,6 +17,8 @@ Hire Lancelot_du_Lac Hercules
 Hire Linus_Torvalds Xena
 Hire Bill_Gates Hulk
 Hire King_Arthur Tarzan
+Hire King_Arthur Spock
+Hire King_Arthur George
 Status
 Fire King_Arthur Tarzan
 Status

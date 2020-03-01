@@ -66,8 +66,14 @@ public:
   }
   // atttempt to hire a warrior
   bool hire(Warrior& somewarrior) {
-    if (somewarrior.getHiredStatus() || !alive) {
-      return false;  // fail if Noble is dead or the warrior is already hired
+    if (!alive) {
+      cout << "Noble " << name << " is already dead!" << endl;
+      return false;  // fail if Noble is dead
+    }
+    if (somewarrior.getHiredStatus()) {
+      cout << "Warrior " << somewarrior.getName() << " is already hired!"
+           << endl;
+      return false;  // fail if the warrior is already hired
     }
     somewarrior.changeHiredStatus();
     army.push_back(&somewarrior);
@@ -76,6 +82,7 @@ public:
   // attempt to fire a warrior
   bool fire(Warrior& somewarrior) {
     if (!alive) {
+      cout << "Noble " << name << " is already dead!" << endl;
       return false;  // fail if Noble is dead
     }
     bool fired = false;
@@ -91,9 +98,12 @@ public:
                 // Warrior to the back of the vector and pop it
         army[i - 1] = army[i];
       }
-      if (fired) {  // pop last element in vector only if the attempt succeed
-        army.pop_back();
-      }
+    }
+    if (fired) {  // pop last element in vector only if the attempt succeed
+      army.pop_back();
+    } else {
+      cout << somewarrior.getName() << " is not hired by " << name << "!"
+           << endl;
     }
     return fired;  // fail if the Warrior is not hired by the Noble
   }
@@ -184,7 +194,7 @@ int main() {
         if (!nobleptr) {
           cout << "Noble " << noble << " not found!" << endl;
         } else {
-          cout << "Warrior" << warrior << "not found!" << endl;
+          cout << "Warrior " << warrior << " not found!" << endl;
         }
       }
     } else if (command == "Fire") {
