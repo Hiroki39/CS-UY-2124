@@ -2,13 +2,14 @@
 #include <vector>
 using namespace std;
 
-class Section;
+class Section;  // class prototype
 class StudentRecord {
   friend ostream& operator<<(ostream& os, const Section& sec);
 
 public:
   StudentRecord(const string& theStudentName)
-      : studentname(theStudentName), grades(14, -1) {}
+      : studentname(theStudentName), grades(14, -1) {}  // initialization list
+  // getters and setters
   string getStudentName() const { return studentname; }
   void setStudentGrade(int theGrade, int labCount) {
     grades[labCount - 1] = theGrade;
@@ -20,9 +21,11 @@ private:
 };
 
 class Section {
+  // friend function prototype
   friend ostream& operator<<(ostream& os, const Section& sec);
 
 public:
+  // embedded TimeSlot class
   class TimeSlot {
     friend ostream& operator<<(ostream& os, const Section& sec);
 
@@ -36,20 +39,21 @@ public:
   };
 
   Section(const string& theSecName, const string& theDay, int theStartTime)
-      : secname(theSecName), slot(theDay, theStartTime) {}
-  Section(const Section& anotherSection)
+      : secname(theSecName), slot(theDay, theStartTime) {}  // constructor
+  Section(const Section& anotherSection)                    // copy constructor
       : secname(anotherSection.secname), slot(anotherSection.slot) {
     for (size_t i = 0; i < anotherSection.records.size(); i++) {
       records.emplace_back(new StudentRecord(*anotherSection.records[i]));
     }
   }
 
+  // getters and setters
   vector<StudentRecord*>& getRecord() { return records; }
   void addStudent(const string& theStudentName) {
     records.emplace_back(new StudentRecord(theStudentName));
   }
 
-  ~Section() {
+  ~Section() {  // destructor
     cout << "section " << secname << " is being deleted" << endl;
     for (StudentRecord*& recordp : records) {
       cout << "deleting " << recordp->getStudentName() << endl;
@@ -60,7 +64,7 @@ public:
 private:
   string secname;
   TimeSlot slot;
-  vector<StudentRecord*> records;
+  vector<StudentRecord*> records;  // a vector of pointers to records
 };
 
 class LabWorker {
@@ -69,12 +73,15 @@ class LabWorker {
 public:
   LabWorker(const string& theName) : name(theName), sec(nullptr) {}
   void addSection(Section& theSec) { sec = &theSec; }
-  void addGrade(const string& theStudentName, int theGrade, int labCount) {
+  bool addGrade(const string& theStudentName, int theGrade, int labCount) {
     for (StudentRecord*& recordp : sec->getRecord()) {
+      // find the student by name in a vector of pointers to records
       if (recordp->getStudentName() == theStudentName) {
         recordp->setStudentGrade(theGrade, labCount);
+        return true;
       }
     }
+    return false;  // avoid failing silently
   }
 
 private:
