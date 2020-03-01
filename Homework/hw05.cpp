@@ -1,6 +1,6 @@
 /*
   hw05.cpp
-  Sec C, Feb 29,2020
+  Sec C, March 1, 2020
   Hongyi Zheng
   Simulate battles between Nobles and their Warriors
 */
