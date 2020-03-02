@@ -10,6 +10,7 @@
 #include <vector>
 using namespace std;
 
+// Simulate the behavior of Warrior
 class Warrior {
   // friend funtion prorotype
   friend ostream& operator<<(ostream& os, const Warrior& somewarrior);
@@ -32,6 +33,7 @@ private:
   bool hired;
 };
 
+// Simulate the behavior of Noble
 class Noble {
   // friend funtion prorotype
   friend ostream& operator<<(ostream& os, const Noble& somenoble);
@@ -39,7 +41,7 @@ class Noble {
 public:
   // initialization list
   Noble(const string& theName) : name(theName), army(), alive(true) {}
-  string getName() const { return name; }
+  string const& getName() const { return name; }
   int getArmySize() const { return army.size(); }  // return the size of army
   int getArmyStrength()
       const {  // sum up strengths of all the Warriors in the army and return

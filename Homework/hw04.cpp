@@ -19,7 +19,7 @@ public:
   Warrior(const string& theName, int theStrength)
       : name(theName), strength(theStrength), hired(false) {}
   // getters and setters
-  string getName() const { return name; }
+  const string& getName() const { return name; }
   int getStrength() const { return strength; }
   void setStrength(int theStrength) { strength = theStrength; }
   bool getHiredStatus() const { return hired; }
