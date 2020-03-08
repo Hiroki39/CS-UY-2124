@@ -18,6 +18,14 @@ public:
     // data is actually a pointer to int
     delete[] data;
   }
+
+  explicit Vector(size_t size, int value = 0)
+      : theSize(size), theCapacity(size), data(new int[theCapacity]) {
+    for (size_t i = 0; i < theSize; i++) {
+      data[i] = value;
+    }
+  }
+
   Vector(const Vector& rhs)
       : theSize(rhs.theSize),
         theCapacity(rhs.theCapacity),
@@ -26,13 +34,14 @@ public:
       data[i] = rhs.data[i];
     }
   }
-  Vector& operator=(const Vector& rhs) {
+
+  const Vector& operator=(const Vector& rhs) {
     // Self assignment
     if (&rhs != this) {
       // free up our resources
       delete[] data;
       // allocate new resources
-      data = new int[theCapacity];
+      data = new int[rhs.theCapacity];
       // copy over any information
       theSize = rhs.theSize;
       theCapacity = rhs.theCapacity;
@@ -42,6 +51,7 @@ public:
     }
     return *this;
   }
+
   void push_back(int val) {
     if (theSize == theCapacity) {  // no more free space
       int* oldData = data;         // remember where the old data is
@@ -55,6 +65,7 @@ public:
     data[theSize] = val;
     theSize++;
   }
+
   size_t size() const { return theSize; }
   void clear() { theSize = 0; }
   void pop_back() { theSize--; }
@@ -63,11 +74,32 @@ public:
   // v[index] = val;
   int& operator[](size_t index) { return data[index]; }  // reference return
 
+  // overload begin() and end() with const and non-const version
+
+  // int* begin() const { return &data[0]; }
+  int* begin() { return data; }
+  const int* begin() const { return data; }
+  // int* end() const { return &data[size()]; }
+  int* end() { return data + theSize; }
+  const int* end() const { return data + theSize; }
+
 private:
   size_t theSize;  // C++ does not allow to have field & method with same name
   size_t theCapacity;
   int* data;
 };
+
+void printVec(const Vector& v) {
+  cout << "[ ";
+  // for (size_t i = 0; i < v.size(); i++) {
+  // cout << v[i] << " ";
+  //}
+  for (int val : v) {  // to make this ranged-for loop possible we need begin()
+                       // and end() method
+    cout << val << " ";
+  }
+  cout << "]" << endl;
+}
 
 int main() {
   Vector v;  // not templated. Our vector can only hold ints.
@@ -75,4 +107,11 @@ int main() {
   v.push_back(42);
   v.push_back(6);
   v.push_back(28);
+  Vector a = v;
+
+  printVec(v);
+
+  // v = 17;
+  // the compiler would interpret it as Vector(17), but we need to make
+  // it reporting an error!
 }

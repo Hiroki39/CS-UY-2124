@@ -20,7 +20,7 @@ public:
   Warrior(const string& theName, int theStrength)
       : name(theName), strength(theStrength), hired(false) {}
   // getters and setters
-  string getName() const { return name; }
+  const string& getName() const { return name; }
   int getStrength() const { return strength; }
   void setStrength(int theStrength) { strength = theStrength; }
   bool getHiredStatus() const { return hired; }
@@ -41,7 +41,7 @@ class Noble {
 public:
   // initialization list
   Noble(const string& theName) : name(theName), army(), alive(true) {}
-  string const& getName() const { return name; }
+  const string& getName() const { return name; }
   int getArmySize() const { return army.size(); }  // return the size of army
   int getArmyStrength()
       const {  // sum up strengths of all the Warriors in the army and return
@@ -96,8 +96,8 @@ public:
           somewarrior.changeHiredStatus();
           fired = true;
         }
-      } else {  // after the Warrior is fired, move pointer to that
-                // Warrior to the back of the vector and pop it
+      } else {  // after the Warrior is fired, move pointer behind the
+                // Warrior to the front and pop the last element
         army[i - 1] = army[i];
       }
     }
@@ -283,7 +283,8 @@ void deleteptrs(vector<Noble*>& nobles, vector<Warrior*>& warriors) {
 }
 
 // output current status of all Nobles and Warriors
-void displayStatus(vector<Noble*>& nobles, vector<Warrior*>& warriors) {
+void displayStatus(const vector<Noble*>& nobles,
+                   const vector<Warrior*>& warriors) {
   cout << "Status" << endl << "======" << endl << "Nobles:" << endl;
   int hiredWarriorCount = 0;
   if (nobles.size() > 0) {
