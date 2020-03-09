@@ -35,7 +35,7 @@ public:
     }
   }
 
-  const Vector& operator=(const Vector& rhs) {
+  Vector& operator=(const Vector& rhs) {
     // Self assignment
     if (&rhs != this) {
       // free up our resources
