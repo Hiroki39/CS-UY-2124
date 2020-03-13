@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 
 project (Homework)
 
-add_compile_options(-std=c++14 -g)
+add_compile_options(-Wall -std=c++14 -g)
 
 
 # Find all cpp files and store in list mains

@@ -1,8 +1,8 @@
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.10)
 
 project (Lab)
 
-add_compile_options(-std=c++14 -g)
+add_compile_options(-Wall -std=c++14 -g)
 
 
 # Find all main*.cpp files and store in list mains
