@@ -152,7 +152,8 @@ void openFile(ifstream& nobleWarriorStream);
 Warrior* searchWarrior(const string& name, const vector<Warrior*>& warriors);
 Noble* searchNoble(const string& name, const vector<Noble*>& nobles);
 void deleteptrs(vector<Noble*>& nobles, vector<Warrior*>& warriors);
-void displayStatus(vector<Noble*>& nobles, vector<Warrior*>& warriors);
+void displayStatus(vector<Noble*> const& nobles,
+                   vector<Warrior*> const& warriors);
 
 int main() {
   ifstream nobleWarriorStream;
@@ -283,8 +284,8 @@ void deleteptrs(vector<Noble*>& nobles, vector<Warrior*>& warriors) {
 }
 
 // output current status of all Nobles and Warriors
-void displayStatus(const vector<Noble*>& nobles,
-                   const vector<Warrior*>& warriors) {
+void displayStatus(vector<Noble*> const& nobles,
+                   vector<Warrior*> const& warriors) {
   cout << "Status" << endl << "======" << endl << "Nobles:" << endl;
   int hiredWarriorCount = 0;
   if (nobles.size() > 0) {

@@ -41,7 +41,7 @@ public:
   void withdrawal(int amount) {
     // if funds are insufficient, generate an error and exit
     if (balance < amount) {
-      cerr << "insufficient funds";
+      cerr << "insufficient funds" << endl;
       return;
     }
     transaction_history.emplace_back("withdrawal", amount);
