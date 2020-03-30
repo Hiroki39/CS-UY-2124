@@ -23,12 +23,6 @@ void displayBikes(const vector<Motorcycle>& bikes);  // prototype
 void fillBikeVectorFromStream(ifstream& bikeStream, vector<Motorcycle>& bikes);
 
 int main() {
-  /*
-    Motorcycle bike;
-    bike.brand = "Harley";
-    bike.model = "cruiser";
-    bike.cc = 1200;
-  */
   Motorcycle bike{"Harley", 1200, "cruiser"};
 
   vector<Motorcycle> bikes;

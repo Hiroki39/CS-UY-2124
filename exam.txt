@@ -1,0 +1,142 @@
+Name: Hongyi Zheng
+
+NYU Net ID: hz2212
+
+Affirmation: Type the contents of the affirmation below, with your name:
+
+I, Hongyi Zheng, affirm that I have completed the exam completely on my own
+without consulting outside resources. I have followed the required rules. I
+understand that violating any of these rules would represent academic
+dishonesty.
+
+Multiple Choice: Write the letter of your choice.
+
+1) D
+
+2) C
+
+3) J
+
+4) B
+
+5) A
+
+
+Short Answer
+
+6) for (int& thing:things) {
+     thing *= 2;
+   }
+
+
+7)
+
+   A: 49
+
+   B: 4
+
+
+8) Falcon& operator=(const Falcon& rhs) {
+    Dragon* lhs_p = new Dragon(*rhs.p);
+    Falcon lhs(rhs.name, lhs_p);
+    return lhs;
+   }
+
+
+
+9)
+
+  a) Thing** data = new Thing*[100];
+
+  b) for (int i = 0; i < 100; ++i) {
+       data[i] = new Thing{i + 1};
+     }
+
+  c) for (int i = 0; i < 100; ++i) {
+       data[i]->val += i;
+     }
+
+  d) for (int i = 0; i < 100; ++i) {
+       delete data[i];
+     }
+     delete[] data;
+
+
+Longer Code Answers
+
+10) void fill(ifstream& ifs, vector<Thing>& things) {
+      int things_num;
+      while(ifs >> things_num) {
+        vector<int> stuff;
+        for(int i = 0; i < things_num; i++) {
+          ifs >> next_int;
+          stuff.push_back(next_int);
+        }
+        Thing next_thing{stuff};
+        things.push_back(next_thing);
+      }
+    }
+
+    int totalStuff(const vector<Thing>& things) {
+      int sum = 0;
+      for(size_t i = 0; i < things.size(); i++) {
+        for(size_t j = 0; j < things[i].stuff.size(); j++) {
+          sum += things[i].stuff[j];
+        }
+      }
+      return sum;
+    }
+
+
+11) class Bit {
+      friend ostream& operator<<(ostream& os, const Bit& theBit) {
+        os << "Name: " << theBit.name << "; Boss: ";
+        if(!theBit.employer) {
+          os << "none";
+        } else {
+          os << theBit.employer->name;
+        }
+        os << "; Bits:";
+        if(theBit.employee.empty()) {
+          os << "none";
+        } else {
+          for (size_t i = 0; i < theBit.employee.size(); i++) {
+            os << " " << theBit.employee[i]->name;
+          }
+        }
+        os << endl;
+        return os;
+      }
+
+    public:
+      Bit(const string& name): name(name), employer(nullptr) {}
+      bool hire(Bit& hired) {
+        if((!hired.employer) && (&hired != this) && (&hired != employer)){
+          if(hired.employer != this) {
+            hired.employer = this;
+            employee.push_back(&hired);
+          }
+          return true;
+        }
+        return false;
+      }
+      bool quit() {
+        if(employer) {
+          for(size_t i = 0; i < employer->employee.size(); i++) {
+            if(employer->employee[i] == this) {
+              employer->employee[i] = employer->employee.back();
+              employer->employee.pop_back();
+              break;
+            }
+          }
+          employer = nullptr;
+          return true;
+        }
+        return false;
+      }
+
+    private:
+      string name;
+      Bit* employer;
+      vector<Bit*> employee;
+    };

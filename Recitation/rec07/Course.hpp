@@ -16,6 +16,7 @@ namespace BrooklynPoly {
     Course(const std::string& courseName);
     const std::string& getName() const;
     bool addStudent(Student* studentp);
+    bool dropStudent(Student* drop_studentp);
     void removeStudentsFromCourse();
 
   private:

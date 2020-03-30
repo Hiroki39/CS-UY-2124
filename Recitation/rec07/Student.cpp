@@ -3,7 +3,7 @@
 using namespace std;
 
 namespace BrooklynPoly {
-  // Student codes
+  // Student Implemetation Codes
   ostream& operator<<(ostream& os, const Student& rhs) {
     os << rhs.name << ":";
     if (rhs.courses.empty()) {
@@ -20,6 +20,7 @@ namespace BrooklynPoly {
   // Student methods needed by Registrar
   Student::Student(const string& theName) : name(theName) {}
   const string& Student::getName() const { return name; }
+  void Student::setName(const string& newName) { name = newName; }
 
   bool Student::addCourse(Course* add_coursep) {
     for (Course* coursep : courses) {
@@ -39,8 +40,15 @@ namespace BrooklynPoly {
         break;
       }
     }
-    courses[i] = courses[courses.size() - 1];
+    courses[i] = courses.back();
     courses.pop_back();
+  }
+
+  void Student::dropFromCourses() {
+    for (Course* coursep : courses) {
+      coursep->dropStudent(this);
+    }
+    courses.clear();
   }
 
 }  // namespace BrooklynPoly

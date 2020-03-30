@@ -7,7 +7,7 @@
 using namespace std;
 
 namespace BrooklynPoly {
-  // Registar codes
+  // Registar Implemention Codes
   ostream& operator<<(ostream& os, const Registrar& rhs) {
     os << "Registar's Report" << endl;
     os << "Courses:" << endl;
@@ -43,8 +43,7 @@ namespace BrooklynPoly {
     size_t courseindex = findCourse(courseName);
     size_t studentindex = findStudent(studentName);
     if (courseindex < courses.size() && studentindex < students.size()) {
-      courses[courseindex]->addStudent(students[studentindex]);
-      return true;
+      return courses[courseindex]->addStudent(students[studentindex]);
     }
     return false;
   }
@@ -56,6 +55,41 @@ namespace BrooklynPoly {
       delete courses[courseindex];
       courses[courseindex] = courses[courses.size() - 1];
       courses.pop_back();
+      return true;
+    }
+    return false;
+  }
+
+  bool Registrar::changeStudentName(const string& oldName,
+                                    const string& newName) {
+    size_t studentindex = findStudent(oldName);
+    if (studentindex < students.size()) {
+      students[studentindex]->setName(newName);
+      return true;
+    }
+    return false;
+  }
+
+  bool Registrar::dropStudentFromCourse(const string& studentName,
+                                        const string& courseName) {
+    size_t courseindex = findCourse(courseName);
+    size_t studentindex = findStudent(studentName);
+    if (courseindex < courses.size() && studentindex < students.size()) {
+      courses[courseindex]->dropStudent(students[studentindex]);
+      courses[courseindex] = courses.back();
+      courses.pop_back();
+      return true;
+    }
+    return false;
+  }
+
+  bool Registrar::removeStudent(const string& studentName) {
+    size_t studentindex = findStudent(studentName);
+    if (studentindex < students.size()) {
+      students[studentindex]->dropFromCourses();
+      delete students[studentindex];
+      students[studentindex] = students.back();
+      students.pop_back();
       return true;
     }
     return false;

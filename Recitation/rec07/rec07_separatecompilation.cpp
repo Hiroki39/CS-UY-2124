@@ -11,7 +11,7 @@
 using namespace std;
 using namespace BrooklynPoly;
 
-int main() {
+int main() {  // test code
   Registrar registrar;
 
   cout << "No courses or students added yet\n";
@@ -45,8 +45,6 @@ int main() {
   registrar.cancelCourse("CS102.001");
   cout << registrar << endl;
 
-  /*
-  // [OPTIONAL - do later if time]
   cout << "ChangeStudentName FritzTheCat MightyMouse\n";
   registrar.changeStudentName("FritzTheCat", "MightyMouse");
   cout << registrar << endl;
@@ -55,10 +53,9 @@ int main() {
   registrar.dropStudentFromCourse("MightyMouse", "CS101.001");
   cout << registrar << endl;
 
-  cout << "RemoveStudent FritzTheCat\n";
-  registrar.removeStudent("FritzTheCat");
+  cout << "RemoveStudent MightyMouse\n";
+  registrar.removeStudent("MightyMouse");
   cout << registrar << endl;
-  */
 
   cout << "Purge for start of next semester\n";
   registrar.purge();

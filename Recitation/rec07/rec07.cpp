@@ -2,16 +2,15 @@
   rec07.cpp
   CS2124
   Hongyi Zheng
-  Yes, you may add other methods.
  */
 #include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
 
-class Student;
+class Student;  // class prototype
 
-class Course {
+class Course {  // friend function prototype
   friend ostream& operator<<(ostream& os, const Course& rhs);
 
 public:
@@ -19,12 +18,13 @@ public:
   Course(const string& courseName);
   const string& getName() const;
   bool addStudent(Student* studentp);
+  bool dropStudent(Student* drop_studentp);
   void removeStudentsFromCourse();
 
 private:
   string name;
   vector<Student*> students;
-};
+};  // Course class
 
 class Student {
   friend ostream& operator<<(ostream& os, const Student& rhs);
@@ -33,15 +33,17 @@ public:
   // Student methods needed by Registrar
   Student(const string& theName);
   const string& getName() const;
+  void setName(const string& newName);
   bool addCourse(Course* coursep);
 
   // Student method needed by Course
   void removedFromCourse(Course* coursep);
+  void dropFromCourses();
 
 private:
   string name;
   vector<Course*> courses;
-};
+};  // Student Class
 
 class Registrar {
   friend ostream& operator<<(ostream& os, const Registrar& rhs);
@@ -53,6 +55,10 @@ public:
   bool enrollStudentInCourse(const string& studentName,
                              const string& courseName);
   bool cancelCourse(const string& courseName);
+  bool changeStudentName(const string& oldName, const string& newName);
+  bool dropStudentFromCourse(const string& studentName,
+                             const string& courseName);
+  bool removeStudent(const string& studentName);
   void purge();
 
 private:
@@ -61,9 +67,9 @@ private:
 
   vector<Course*> courses;
   vector<Student*> students;
-};
+};  // Registar Class
 
-int main() {
+int main() {  // test code
   Registrar registrar;
 
   cout << "No courses or students added yet\n";
@@ -97,8 +103,6 @@ int main() {
   registrar.cancelCourse("CS102.001");
   cout << registrar << endl;
 
-  /*
-  // [OPTIONAL - do later if time]
   cout << "ChangeStudentName FritzTheCat MightyMouse\n";
   registrar.changeStudentName("FritzTheCat", "MightyMouse");
   cout << registrar << endl;
@@ -107,10 +111,9 @@ int main() {
   registrar.dropStudentFromCourse("MightyMouse", "CS101.001");
   cout << registrar << endl;
 
-  cout << "RemoveStudent FritzTheCat\n";
-  registrar.removeStudent("FritzTheCat");
+  cout << "RemoveStudent MightyMouse\n";
+  registrar.removeStudent("MightyMouse");
   cout << registrar << endl;
-  */
 
   cout << "Purge for start of next semester\n";
   registrar.purge();
@@ -142,6 +145,18 @@ bool Course::addStudent(Student* studentp) {
   return false;
 }
 
+bool Course::dropStudent(Student* drop_studentp) {
+  for (size_t i = 0; i < students.size(); i++) {
+    if (students[i] == drop_studentp) {
+      students[i]->removedFromCourse(this);
+      students[i] = students.back();
+      students.pop_back();
+      return true;
+    }
+  }
+  return false;
+}
+
 void Course::removeStudentsFromCourse() {
   for (Student* studentp : students) {
     studentp->removedFromCourse(this);
@@ -150,6 +165,7 @@ void Course::removeStudentsFromCourse() {
 }
 
 // Student codes
+// output operator overload
 ostream& operator<<(ostream& os, const Student& rhs) {
   os << rhs.name << ":";
   if (rhs.courses.empty()) {
@@ -164,9 +180,12 @@ ostream& operator<<(ostream& os, const Student& rhs) {
 }
 
 // Student methods needed by Registrar
+// Constructor, getter and setter
 Student::Student(const string& theName) : name(theName) {}
 const string& Student::getName() const { return name; }
+void Student::setName(const string& newName) { name = newName; }
 
+// enroll Student into a course
 bool Student::addCourse(Course* add_coursep) {
   for (Course* coursep : courses) {
     if (coursep->getName() == add_coursep->getName()) {
@@ -178,6 +197,7 @@ bool Student::addCourse(Course* add_coursep) {
 }
 
 // Student method needed by Course
+// remove student from course (only used when a class is cancelled)
 void Student::removedFromCourse(Course* removed_coursep) {
   size_t i;
   for (i = 0; i < courses.size(); i++) {
@@ -185,11 +205,20 @@ void Student::removedFromCourse(Course* removed_coursep) {
       break;
     }
   }
-  courses[i] = courses[courses.size() - 1];
+  courses[i] = courses.back();
   courses.pop_back();
 }
 
+// remove student from course when course is not deleted
+void Student::dropFromCourses() {
+  for (Course* coursep : courses) {
+    coursep->dropStudent(this);
+  }
+  courses.clear();
+}
+
 // Registar codes
+// output operator overlpad
 ostream& operator<<(ostream& os, const Registrar& rhs) {
   os << "Registar's Report" << endl;
   os << "Courses:" << endl;
@@ -203,8 +232,10 @@ ostream& operator<<(ostream& os, const Registrar& rhs) {
   return os;
 }
 
+// constructor
 Registrar::Registrar() {}
 
+// add a new course
 bool Registrar::addCourse(const string& courseName) {
   if (findCourse(courseName) == courses.size()) {
     courses.push_back(new Course(courseName));
@@ -212,6 +243,7 @@ bool Registrar::addCourse(const string& courseName) {
   }
   return false;
 }
+// add a new student
 bool Registrar::addStudent(const string& studentName) {
   if (findStudent(studentName) == students.size()) {
     students.push_back(new Student(studentName));
@@ -220,6 +252,7 @@ bool Registrar::addStudent(const string& studentName) {
   return false;
 }
 
+// enroll student into a course
 bool Registrar::enrollStudentInCourse(const string& studentName,
                                       const string& courseName) {
   size_t courseindex = findCourse(courseName);
@@ -230,6 +263,7 @@ bool Registrar::enrollStudentInCourse(const string& studentName,
   return false;
 }
 
+// cancel a course
 bool Registrar::cancelCourse(const string& courseName) {
   size_t courseindex = findCourse(courseName);
   if (courseindex < courses.size()) {
@@ -242,6 +276,47 @@ bool Registrar::cancelCourse(const string& courseName) {
   return false;
 }
 
+// change a student's name
+bool Registrar::changeStudentName(const string& oldName,
+                                  const string& newName) {
+  size_t studentindex = findStudent(oldName);
+  if (studentindex < students.size()) {
+    students[studentindex]->setName(newName);
+    return true;
+  }
+  return false;
+}
+
+// drop a stuent from a course
+bool Registrar::dropStudentFromCourse(const string& studentName,
+                                      const string& courseName) {
+  size_t courseindex = findCourse(courseName);
+  size_t studentindex = findStudent(studentName);
+  if (courseindex < courses.size() && studentindex < students.size()) {
+    courses[courseindex]->dropStudent(students[studentindex]);
+    courses[courseindex] =
+        courses.back();  // replace dropped student with the last student in the
+                         // vector and pop the last element
+    courses.pop_back();
+    return true;
+  }
+  return false;
+}
+
+// drop student from all enrolled courses and delete that student
+bool Registrar::removeStudent(const string& studentName) {
+  size_t studentindex = findStudent(studentName);
+  if (studentindex < students.size()) {
+    students[studentindex]->dropFromCourses();
+    delete students[studentindex];
+    students[studentindex] = students.back();
+    students.pop_back();
+    return true;
+  }
+  return false;
+}
+
+// delete all courses and students
 void Registrar::purge() {
   for (Student* studentp : students) {
     delete studentp;
@@ -253,6 +328,7 @@ void Registrar::purge() {
   courses.clear();
 }
 
+// find a student with name and return the index
 size_t Registrar::findStudent(const string& studentName) const {
   for (size_t i = 0; i < students.size(); i++) {
     if (students[i]->getName() == studentName) {
@@ -262,6 +338,7 @@ size_t Registrar::findStudent(const string& studentName) const {
   return students.size();
 }
 
+// find a course with name and return the index
 size_t Registrar::findCourse(const string& courseName) const {
   for (size_t i = 0; i < courses.size(); i++) {
     if (courses[i]->getName() == courseName) {

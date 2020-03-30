@@ -19,6 +19,11 @@ namespace BrooklynPoly {
     bool enrollStudentInCourse(const std::string& studentName,
                                const std::string& courseName);
     bool cancelCourse(const std::string& courseName);
+    bool changeStudentName(const std::string& oldName,
+                           const std::string& newName);
+    bool dropStudentFromCourse(const std::string& studentName,
+                               const std::string& courseName);
+    bool removeStudent(const std::string& studentName);
     void purge();
 
   private:

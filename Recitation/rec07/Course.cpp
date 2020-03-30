@@ -5,7 +5,7 @@
 using namespace std;
 
 namespace BrooklynPoly {
-  // Course codes
+  // Course Implementation Codes
   ostream& operator<<(ostream& os, const Course& rhs) {
     os << rhs.name << ":";
     if (rhs.students.empty()) {
@@ -26,6 +26,18 @@ namespace BrooklynPoly {
     if (studentp->addCourse(this)) {
       students.push_back(studentp);
       return true;
+    }
+    return false;
+  }
+
+  bool Course::dropStudent(Student* drop_studentp) {
+    for (size_t i = 0; i < students.size(); i++) {
+      if (students[i] == drop_studentp) {
+        students[i]->removedFromCourse(this);
+        students[i] = students.back();
+        students.pop_back();
+        return true;
+      }
     }
     return false;
   }
