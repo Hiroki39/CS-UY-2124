@@ -9,6 +9,7 @@ public:
     // void eat() { cout << "eating" << endl; }
     virtual void eat() { cout << "eating" << endl; }
     virtual ~Pet() {}  // virtual destructor
+
 protected:
     const string& getName() const { return name; }
 
@@ -31,7 +32,7 @@ public:
 
 class Slug : public Pet {
 public:
-    using Pet::Pet;  // a simpler way
+    using Pet::Pet;  // "constructor inheritance"
 };
 
 class Roach : public Pet {
