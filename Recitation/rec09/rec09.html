@@ -1,0 +1,415 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CS 2124 - Recitation 9</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  </head>
+  <body>
+    <h1 align="center">CS 2124 &#151; Object Oriented Programming</h1>
+    <h2 align="center">Recitation 9</h2>
+    <h2>Topics </h2>
+    <ul>
+      <li>Simple Inheritance</li>
+      <li>Writing constructors for an inheritance heirarchy</li>
+      <li>polymorphism - requirements to use and when </li>
+      <li>Slicing and legal assignments</li>
+    </ul>
+    <h2>Recitation Project</h2>
+    <h3>The Domain: Printed Material (books, magazines and so forth)</h3>
+    <h4><a name="Task1" id="Task1"></a>Task 1.</h4>
+    <p>
+      Read <a href="ignore/rec09-000-hierarchy-only.cpp">this code</a> and
+      draw the "UML" diagram for it. </p>
+    <p>
+      In a UML diagram you represent a class with a box
+      with the class name, methods and fields.<br>
+      Ineritance (generalization) is shown by an arrown pointing from
+      the derived (child) class to the base (parent) class. </p>
+    <p>
+      Yes, there can be lots of other special sorts of lines and
+      arrows but we are not going to worry about them.</p>
+
+    <p><a href="ignore/rec09-AK.html#Task1">Answer key Task 1.</a> </p>
+    <h4><a name="Task2" id="Task2"></a>Task 2.</h4>
+    <p>
+      We need to add the number of pages to this hierarchy.<br>
+      Which of these objects should have this data
+      member <code>unsigned numberOfPages;</code>?
+    <p>
+      Modify <a href="ignore/rec09-000-hierarchy-only.cpp">this code</a> and
+      place this data member EVERYWHERE you think it should go. <br>
+
+      You should have code that
+      looks <a href="ignore/rec09-001-num-pgs-000.cpp">like this</a>.<br>
+
+      <strong><font size="+1"> Do NOT just copy this code - try to
+      write your own version first and then look at solution provided
+      to see if you got it right. </font></strong></p>
+
+    <h4><a name="Task3" id="Task3"></a>Task 3.</h4>
+    <p>Is this correct?<br>
+      No.<br>
+
+      When developing an inheritance tree, the concept is to
+      &quot;move&quot; data member and methods as far &quot;up&quot;
+      the tree as possible.<br>
+
+      Now fix this.<br>
+
+      You should have code <a href="ignore/rec09-002-correct-pgs.cpp">like
+      this</a>. <strong><font size="+1">Again, do NOT just copy this
+      code </font></strong></p>
+
+    <h4>Task 4.</h4>
+    <p>How does that number of pages data member get initialized?<br>
+
+      Which class is responsible for doing this?<br>
+
+      Try putting the constructor ONLY in the base class - there's
+      where it seems it ought to be, right? <br>
+
+      That's where the data member is, right? <br>
+
+      Should this compile? (Look at the tester/main code) </p>
+
+    <p>
+      You should have code that looks
+      like <a href="ignore/rec09-003-just-base-ctor.cpp">this</a>.
+      <strong><font size="+1">Again, copying is not
+      learning!</font></strong></p>
+
+    <h4>Task 5.</h4>
+    <p>
+      Each child class must call the constructor for it's direct base
+      class.<br>
+
+      Note that the Novel and TextBook classes should not also
+      try to initialize their PrintedMaterial class portions.<br>
+
+      Now you should have: this <a href="ignore/rec09-004-ctor-correct.cpp">
+      corrected code</a>.
+
+      <strong><font size="+1"> copying?</font></strong><br>  Try
+      adding to Novel and TextBook the constructor for PrintedMaterial
+      - should this compile?<br>  (Be sure to remove these constructor
+      calls before going on to Task
+      6.<strong><font size="+1"></font></strong><br>
+    </p>
+
+    <h4>Task 6.</h4>
+    <p>Where should the following method go?</p>
+
+    <blockquote>
+      <p><code>void displayNumPages() const { cout &lt;&lt;
+      numberOfPages; }</code> </p>
+    </blockquote>
+
+    <p>Think about how far up the tree...? </p>
+    <p>
+      And test your method on the objects <code>t</code>
+      and <code>n</code>. </p>
+    <p>
+      <a href="ignore/rec09-005-dispNumLOgsInBase.cpp">solution
+      code</a> <strong><font size="+1">(you know the
+      drill)</font></strong></p>
+    <p>
+      Try rewriting and testing it as an output operator!!
+
+    <h4>Task 7.</h4>
+
+    <p>
+      TextBooks also have an index and thus
+      a <code>numOfIndexPages</code> data member.<br>
+
+      This should be shown in the <code>displayNumPages</code> in
+      the... where? Which classes? </p>
+
+    <p>
+      Note that for TextBooks, there will be two values output.</p>
+
+    <p>
+      <a href="ignore/rec09-006-bad-private.cpp">Here's a
+        solution</a>.
+      <strong><font size="+1">(yes, you can copy this
+          one!!!)</font></strong><br>
+
+      Figure out what's wrong with it.</p>
+
+    <h4>Task 8.</h4>
+
+    <p>
+      Fix it (from the previous Task).<br>
+
+      You should use a call to a base class' method
+      (<a href="ignore/rec09-007-indexpages.cpp">fixed</a>)
+      <strong><font size="+1">(copy? nyet!)</font></strong></p>
+
+    <h4>Task 9.</h4>
+    <p>
+      Now we consider that we want to maintain a collection of these
+      printy-things we created. </p>
+    <p>How?<br>
+      Of course - a vector.<br>
+      A vector of what?<br>
+      Lets consider<code>vector&lt;PrintedMaterial&gt;</code>.</p>
+
+    <p>
+      We can test if this will work without working with a vector - yet.<br>
+
+      This is a good development practice: try something little and
+      get it working before putting that little thing into a bigger
+      problem.<br>
+
+      If you can't get it to work by itself in a simple context, it
+      will be harder to solve a more complex problem with non-working
+      code! <br>
+
+      Recall that <code>push_back</code> makes a COPY of the thing
+      stored.<br>
+
+      It's like an assignment statement inside the vector.<br>
+
+      So we can test that this assignment will work in a vector,
+      without a vector, by trying to directly assign a derived class
+      object (<code>TextBook</code>) to a base class object
+      (<code>PrintedMaterial</code>). <br>
+
+      The base class object on the rhs of the assignment operators is
+      used as a model of a <code>PrintedMaterial</code> object being
+      placed into a <code>vector&lt;PrintedMaterial&gt;</code>).<br>
+
+      After the assignment, we can ask that base class object to do
+      its <code>displayNumPages</code> method.<br>
+
+      So do that: assign a <code>TextBook</code> object to
+      a <code>PrintedMaterial</code> object and ask it
+      to <code>displayNumPages</code>.</p>
+
+    <p>Do that and see what happens.<br>
+      This would be the code you would add: </p>
+    <blockquote>
+      <p><code>PrintedMaterial</code> <code>pm = t; // like putting a t into a vector of PrintedMaterials<br>
+          pm.displayNumPages();</code></p>
+    </blockquote>
+
+    <p>This is SLICING in action.</p>
+    <p>(<a href="ignore/rec09-009-PM-obj-assgnd-T.cpp">code</a>) <strong><font size="+1">(no,
+    no, no!)</font></strong></p>
+    <h4>Task 10.</h4>
+    <p>
+      Oh dear! t didn't display like a <code>TextBook</code> - it
+      displayed like a <code>PrintedMaterial</code> object! <br>
+
+      Slicing!</p>
+    <p>
+      OK, lets. try this with pointers.
+    <p>
+      Some of you may recall from class that we have used
+      pointer-to-base-class type pointers to invoke... something
+      (can't remember).<br>
+
+      [<em>Polymorphism</em>, also know in C++ as the
+      &quot;<em>virtual mechanism</em>&quot;]
+    <p>
+      A <code>vector&lt;PrintedMaterial*&gt;</code> is supposed to
+      solve this problem:.<br>
+
+      [Don't forget to use the <code>-&gt;</code> operator to
+      dereference a pointer in this case!] </p>
+
+    <blockquote>
+      <p> <code>PrintedMaterial* pmPtr;<br>
+          pmPtr = &amp;t;<br>
+    // instead of putting an actual PrintedMaterial<br>
+    // object into the vector, we put a pointer to<br>
+    // a PrintedMaterial object (t) into a vector<br>
+    // of pointers-to-PrintedMaterial<br>
+    // (that is, pointers to the Base class)<br>
+    // we'll be &quot;managing&quot; our objects by using<br>
+    // 
+    pointers to PrintedMaterial values.</code></p>
+      <p> <code>pmPtr-&gt;displayNumPages(); </code></p>
+    </blockquote>
+    <p>
+      (<a href="ignore/rec09-010-prt-PM-wo-virt.cpp">code</a>) 
+      <strong><font size="+1">(still no, no, no!)</font></strong></p>
+    <h4>Task 11.</h4>
+    <p>Oh dear!</p>
+    <p>
+      The <code>TextBook</code> object used to show the number of
+      index pages.<br>
+      
+      Why did it stop?<br>
+      It didn't!<br>
+
+      We were not getting a <code>TextBook</code> object when we
+      dereferenced a <code>PrintedMaterial*</code> value.<br>
+
+      But (you'll complain) we STORED the address of
+      a <code>TextBook</code> object in
+      that <code>PrintedMaterial</code> pointer variable
+      (<code>pmPtr</code>).<br>
+
+      Yes, you did.<br>
+      But the derefence works like this:<br>
+      When you dereference a pointer to an plain old int you get an int. <br>
+
+      When you dereference a pointer to an plain old Elephant you get
+      an Elephant.<br>
+
+      When you dereference a pointer to an base class in an
+      inheritance hierarchy which holds the address of an object of a
+      type that was publicly derived from the base class, you get the
+      BASE part of the derived class! (whew! so many words!)</p>
+
+    <p>
+      So is there a way to get the derived
+      class' <code>displayNumPages()</code>?<br>  YES!!!</p>
+
+    <p>
+      <em>polymorhphism</em> (using the virtual mechanism) (is there
+      such as word as 'virtuality'?)<br>
+
+      Here's the other way to say things (with even more words) :<br>
+
+      When you dereference a pointer to an base class which has a
+      virtual method in an inheritance hierarchy which holds the
+      address of an object of a type that was publicly derived from
+      the base class, you get the DERIVED class. (Way too many words
+      but you must understand the concept).</p>
+
+    <p>
+      A place that can hold a Base class pointer value can hold a
+      pointer to ANY object that inherits from Base.<br>  The virtual
+      mechanism is only invoked when pointer to base classes are used
+      (or reference to base class in function parameters).<br>  So you
+      must use the <code>-&gt;</code> to invoke the virtual
+      mechanism.
+    </p>
+    <p>
+      Make the <code>displayNumPages()</code>virtual and see how that
+      works. </p>
+
+    <p>
+      NOTE even without writing &quot;virtual&quot; this overriden
+      method IS virtual.<br>
+
+      &quot;Viruality&quot; cannot be removed once installed
+    </p>
+
+    <p>
+      Write code that adds a virtual version
+      of <code>displayNumPages</code> in the correct places.</p>
+
+    <p>
+      (<a href="ignore/rec09-011-virt.cpp">code</a>)
+      <strong><font size="+1">(and even now still no, no, no!)</font></strong></p>
+    <h4>Task 12.</h4>
+
+    <p>
+      Recall that the virtual mechanism works with either pointers to
+      base class or reference to base class.<br>
+
+      Write a standalone function
+      named <code>displayNumberOfPages<font face="Times New Roman,
+      Times, serif"> </font></code>that will display ANY type
+      inherited from PrintedMaterial.<br>
+
+      (Do not use pointers for this.)</p>
+
+    <p>(<a href="ignore/rec09-012-virt-ref.cpp">code</a>) 
+      <strong><font size="+1">(not even this last one!)</font></strong></p>
+    <h4>Task 13.</h4>
+    <p>
+      Should it be OK to create an obect of
+      type <code>PrintedMaterial</code>?<br>
+
+      What is a <code>PrintedMaterial</code> really?</p>
+    <p>
+      But if we don't want to allow <code>PrintedMaterial</code>
+      things, don't we still want to make sure that any object that
+      derived from <code>PrintedMaterial</code> MUST have
+      a <code>displayNumPages()</code>method?</p>
+    <p>Yes.</p>
+    <p>So how?<br>
+      <em>pure virtual methods</em></p>
+    <p>
+      Making a method pure make the class it is an <em>abstract</em>
+      class - that means that C++ will not allow an object of that
+      type to be created.<br>  It also means that any class deriving
+      from that abstract class <strong>must</strong> override that
+      pure virutal method to create a <em>concrete</em> class - that
+      means that C++ will allow objects to be created.<br>  (A
+      concrete class is a class with no pure virtual methods - all
+      pureness has been overridden.)</p>
+    <p>
+      The syntax for making a virtual method be a pure virtual method
+      is to add the designation &quot;<code>= 0</code>&quot; after the
+      closing parenthsis of the parameter list (or after
+      the <code>const</code> if it's an accessor). A pure virual
+      method can have a body or it can just be a declaraion. Which to
+      choose depends on what such an abstract class could do. Our
+      class is incredibly simple and the display method can do the
+      display from this abstract class so we'll use a body. Most of
+      the time, there is no body in a pure virtuall method because the
+      class is SO abstract that it would be impossible to know what to
+      write as the code in the body. In all of these forms, the class
+      becomes abstract and a child class must override (that is
+      rewrite) the pure virtual method (to remove the pureness).</p>
+
+    <p>
+      <code>void nonConstMethodDeclar( ) = 0; // the normal way <br>
+        void constMethodDeclar( ) const = 0; // the normal way <br>
+        void nonConstMethodWithBody( ) = 0 {} // INCORRECT!  Even
+        though your compiler may accept it. <br>
+        void constMethodWithBody( ) const = 0 {}  // INCORRECT!  Even though your compiler may accept it.
+    </code></p>
+    <p>
+      The normal design reason for pure virtual is to enforce that all
+      children will have this method - and that only they can completely
+      define it because only they know the specifics of themselves.<br>
+
+      Move a method so far up the inheritance tree that you can no longer
+      write it! - that's where a pure virtual method should go.</p>
+    <p>
+      Write code to make the base class's
+      method <code>displayNumPages</code> pure virtual and see what
+      error occur in your code. </p>
+
+    <p>(<a href="ignore/rec09-013-abstract-first-try.cpp">code</a>) [won't compile - why?] </p>
+    <h4>Task 14.</h4>
+    <p>
+      The problem is that we are now trying to create (instantiate)
+      abstract classes and C++ won't allow it.<br>  One of those
+      classes we want to make uncreateable (PrintedMaterial) but the
+      others must have written <code>displayNumPages()</code>methods.</p>
+    <p>
+      Why did <code>TextBook</code> not have a compilation problem?
+      (It -did- override the pure virtual method.) </p>
+    <p>
+      Do whatever needs to be done so that we have a nice clean
+      compile.<br>
+
+      You can remove those attempts to create objects that we don't
+      want to be able to create. (And any other code you've already
+      tested.)<br>
+
+      (<a href="ignore/rec09-014-abstract-fixed.cpp">code</a>) </p>
+
+    <h4>Task 15.</h4>
+    <p>This is what we'd like to have done in the very beginning.</p>
+    <p>
+      Now that we've figured out how to &quot;store a bunch of
+      similar-in-an-heritance-way things&quot; - by actually storing
+      them as pointers to their base classes, let's try it.<br>
+
+      Create a vector for all the createable objects and then loop
+      through the vector asking each of the &quot;stored&quot; things
+      to do their <code>displayNumPages()</code>method. </p>
+
+    <p>(<a href="ignore/rec09-015-vector.cpp">code</a>)</p>
+    <hr>
+    <p><i>Maintained by <a href="http://cis.poly.edu/jsterling">John Sterling</a> 
+  (<a href="mailto:john.sterling@nyu.edu">john.sterling@nyu.edu</a>).
+  </body>
+</html>
