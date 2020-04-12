@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CS 2124 - Recitation 10 Part One</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  </head>
+
+  <body>
+    <h1 align="center">CS 2124 &#151; Object Oriented Programming</h1>
+    <h1 align="center">Recitation 10 Part One</h1>
+    <h2 align="center">Part One</h2>
+    <h2>Topics</h2>
+    <ul>
+      <li>Inheritance 
+      <li>Polymorphism</li>
+    </ul>
+    <p>
+      <u>PART ONE (do <a href="rec10B.html">PART TWO</a> after
+        you have finished PART ONE)</u></p>
+<!-- 
+
+I decided to remove this. Students seem to see the point without being
+forced to "have a discussion". TA's are welcome to hold such
+discussions if they feel they are beneficial.
+
+    <p>
+      The group will discuss and solve the design phase for both PARTs
+      before anyone starts writing code.</p>
+-->
+    <p>
+      We are writing code to model for a Musical Instrument Lending
+      Library and some musicians.</p>
+
+    <p>
+      Our MIL<sup>2</sup> (Musical Instrument Lending Library)
+      provides the musicians in this land with instruments. It's sort
+      of like an old-style <code>C</code>ommunist system in that any
+      musician can go to the MIL<sup>2</sup> and get an instrument for
+      no charge (but they have no choice in what kind of instrument
+      the get!).  Musicians will return their instrument to the
+      MIL<sup>2</sup> at some point.</p>
+    <ul>
+      <li>When the MIL<sup>2</sup> receives an instrument, 
+        <ul>
+          <li>
+            it first tests the instrument by making a sound on it (see
+            the section &quot;Making Sound&quot; below)
+          <li>
+            then places that instrument in its inventory <em>at the
+            first available place</em> in the inventory.<br>
+            <ul>
+              <li>
+                (it doesn't actually place the instrument itself, of
+                course. The instrument exists outside the MIL<sup>2</sup>
+                and we don't want to make a copy to be stored - there
+                should be only one instance of that instrument. A pointer
+                to the instrument to be stored would be added to the
+                inventory.)
+              <li>
+                And if there wasn't enough space in the MILL, then
+                they call in carpenters to build an additional bin at
+                the end of the row to hold the new instrument.
+
+        </ul>
+      <li>When the MIL<sup>2</sup> loans out an instrument, 
+        <ul>
+          <li>
+            it returns the next available instrument (starting at index 0).
+          <li>
+            That of course leaves an <em>empty bin</em>. We are
+            modelling something physical here, so the MILL is not just
+            going to "shrink" as instruments are removed.
+          <li>
+            What if there aren't any left? Hm, if we are
+            returning <em>instruments</em>, this is
+            difficult. Instead, we could return something
+            different. What?  The <em>address</em> of the
+            instrument. How does this help? If we don't have any
+            instruments we can return <code>nullptr</code>.
+          <li>
+            it no longer has that instrument in its inventory<br>
+
+            (but the instrument itself still exists, of course) </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      Each morning before the MIL<sup>2</sup> opens its doors, it
+      tests all the instruments in its inventory by making sounds on
+      them.<br>
+
+      This is modeled by writing output (shown below).</p>
+
+    <p>
+      At the start of the modeling code, the MIL<sup>2</sup> is filled
+      with instruments by the modeling programmer - see tester code (link
+      below).</p>
+
+    <h3>Instruments</h3>
+    <p>
+      In the world we are modeling, there are only brass instruments,
+      string instruments and percussion instruments.</p>
+
+    <h4>Brass</h4>
+    <p>
+      Each brass instrument has a mouthpiece which has a size (an
+      unsigned). There are three different kinds of brass instruments
+      based on the size of their mouthpieces. A mouthpiece may be big,
+      12, medium, 9, or small, 4, respectively.  Note the size (12, 9,
+      or 4) is provided in the constructor, Perhaps interestlingly (or
+      not) there are no other mouthpiece sizes in this world. Making a
+      sound is done by blowing on the mouthpiece. We'll model this
+      making of sound by writing output on the screen (shown
+      below). Another classification of brass instruments is that
+      there are trumpets and trombones. They differ from each other in
+      the sounds they make when they are played but this will dealt
+      with in part two of the recitation.  So there will really be
+      nothing except the constructors for trumpets and trombones in
+      part one.</p>
+
+    <h4>String</h4>
+    <p>
+      String instruments in this world have only one string and it has
+      a pitch (an unsigned) which is set when the string instrument is
+      created and never changes.  For both, making a sound is done by
+      bowing the string to produce the pitch.  We'll model this making
+      of sound by writing output on the screen (shown below).  The two
+      kinds of stringed instruments we have in this world are violins
+      and cellos. They differ from each other in the sounds they make
+      when played but this will dealt with in part two of the
+      recitation. So there will really be nothing except the
+      constructors for violins and cellos in part one.</p>
+
+    <h4>Percussion</h4>
+    <p>
+      Percussions instruments in this world, like most all musical
+      worlds are hardly considered real instruments. They have no data
+      members. For both, making a sound is done by hitting them.The
+      two kinds of percussion instruments we have are drums and
+      cymbals which make different sounds when played but this will
+      dealt with in part two of the recitation. So there will really
+      be nothing except the constructors for drums and cymbals in part
+      one.</p>
+
+    <h4>Making Sound</h4>
+    <p>All instruments <I>must</I> be able to make sounds.</p>
+    <p>
+      Specifically we want the output to the screen for making a sound
+      to be like this:</p>
+    <ul>
+      <li><u>To MAKE SOUND</u><b>:</b> 
+        <ul>
+          <li>For all brass instruments the output should also be:<br>
+        "<FONT 
+    face=Arial>To make a sound... blow on a mouthpiece of size 9</FONT>"<br>
+
+        (9 would be the size of the mouthpiece that this particular
+        woodwind instrument has)
+      <li>For all string instruments the output should be:<br>
+        "<FONT face=Arial>To make a sound... bow a string with pitch 567</FONT>"<BR>
+        (567 would be the pitch that this particular stringed instrument has) 
+      <li>For all percussion instruments the output should be:<br>
+        "<FONT face=Arial>To make a sound... hit me!</FONT>" </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Musicians</h3>
+    <p>
+      We have provided the code for the Musician class. Musicians can
+      obtain instruments from the MIL<SUP>2</SUP> and make sounds on
+      them. They can return their instrument to the MIL<SUP>2</SUP>.</P>
+    <h3>Todo</h3>
+    <p>
+      Write the class hierarchy for the instrument and MIL<SUP>2</SUP>
+      classes. As always, before writing any code you
+      should <I>program</I>. Yes, the analysis part is a major part of
+      the activity of programming. You should do analysis to determine
+      what classes should be created and how they are related.
+<!--
+
+Again, TA's feel free to hold the "group problem solving exercise"
+below, if you think it is beneficial, but it is not clear to me that
+it is.
+
+      (This will be done as a group problem solving exercise.)
+-->
+    </p>
+    <p>
+      You will most likely be using inheritance and the virtual
+      mechanism wherever possible and wherever it would be needed.<BR>
+
+      You might also need to write code to show the containment and
+      association relationships - if there are any!</P>
+
+    <p>
+      Recall that in designing with inheritance, you try to move data
+      members and methods "up" (towards the base) as far as
+      possible.</p>
+    <p>
+      The object we are most focused on in this recitation is the
+      MIL<sup>2</sup>.  Consider the virtual mechanism when
+      implementing this class' methods. (Will it have any virtual
+      methods itself?) And abstract classes as ways to "enforce" that
+      derived classes are consistent.</p>
+
+    <h3>Into the Future!</h3>
+    <p>
+      For the future (and for those without the requisite musical
+      knowledge) <b>:</b></p>
+    <p>
+      In addition to drums and cymbals, tambour, tambourine,
+      grandeCasse, triangle.  bongo, conga, timbale, castanets,
+      maracas, guiro, as well as xylophone, orchestra bells, chimes,
+      marimba, vibraphone (vibes), crotales and amgloken are in the
+      percussion family.</p>
+    <p>
+      Trumpet, flugelhorn, bugle, trombone, French horn, euphonium, tuba,
+      cor de Chasses, sackbutt, zink, and sousaphone are also in the brass
+      family.</p>
+    <p>
+      Other stringed instruments are viola, contrabass violin (bass),
+      guitar, lute, banjo, ukelele, balalaika, oud, sitar, zither, and
+      kora.</p>
+    <p>
+      Flute, saxophone, clarinet, oboe, bassoon, shawm, cor Anglais,
+      krummhorn and rackett are in the woodwind family which is a kind of
+      wind instrument family that is completely different from brass
+      instruments - but they are still instruments.</p>
+    <p>
+      You should write your code so that <U>in the future</U>, if any
+      of these kinds of instruments are needed, your C++ program would
+      be ready to handle them with no (or almost no) modifications -
+      because of the way you wrote your code for the classes using
+      inheritance.</P>
+
+    <h3>Develop (and test!) Incrementally</h3>
+    <p>
+      Here is <a href="cs1124-rec10-PART-ONE.cpp">the tester code</A>
+      that tests your classes by declaring some variables and invoking
+      some methods. It also contains the Musician class we
+      wrote. There is lots of commented out code. Uncomment it little
+      by little in the order we have it in the file so that you can
+      develop incrementally.<br>
+
+      Add your class definitions to this code.</p>
+    <p>
+      The tester code is in sections. Only do one section or just one line from 
+      a section at a time. Get it to compile and then go on.</p>
+    <p>
+      To start with, implement only the Instrument class and make sure
+      it will compile.  Then implement one class that inherits from
+      Instrument and make sure it will compile. And so forth.</p>
+    <p>
+      Don't bother with separate compilation or namespacing
+      today. (You have enough to do.) You may define all methods in the
+      class definitions.</p>
+    <p>
+      After you have working code, try to create some objects of any
+      abstract classes you have written. Should this work? Why?</p>
+    <hr align=left>
+    <p>
+      Once all this is working, go on
+      to <a href="rec10B.html">PART TWO</a></p>
+    <hr>
+</body>
+

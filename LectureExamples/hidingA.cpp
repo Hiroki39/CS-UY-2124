@@ -17,5 +17,7 @@ public:
 
 int main() {
     Derived der;
+    der.foo(17);
+    der.foo();
     // der.Base::foo(17);
 }

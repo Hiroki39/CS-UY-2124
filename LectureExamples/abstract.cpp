@@ -17,6 +17,8 @@ private:
     int x, y;
 };
 
+void Shape::draw() { cout << "common draw code\n"; }
+
 class Triangle : public Shape {
 public:
     Triangle(int x, int y) : Shape(x, y) {}

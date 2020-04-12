@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CS 2124 - Recitation 10</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  </head>
+
+  <body>
+    <h1 align="center">CS 2124 &#151; Object Oriented Programming</h1>
+    <center>
+      <h1>Recitation 10</h1>
+    
+      <h2 align="center">Part Two</h2>
+    </center>
+    <h2>Topics</h2>
+
+    <ul>
+      <li>Inheritance
+      <li>Polymorphism
+    </ul>
+
+    <p><u>PART TWO</u></p>
+
+    <p>
+      We are writing code to model a little world that has an
+      orchestra, musicians and a Musical Instrument Lending Library.</p>
+
+    <p>
+      We've gotten working classes for the MIL<sup>2</sup> (Musical
+      Instrument Lending Library), the Musican, and the Instrument
+      hierarchy.</p>
+
+    <p>Now it's time to use them.</p>
+
+    <p>We'll be modeling a little world in which things happen.</p>
+
+    <p>
+      The classes are created to allow a programmer to write code
+      that models the activities in the world.<br>
+      We'll call this a scenario.</p>
+
+    <p>
+      Here's a possible scenario in this (slightly) expanded musical
+      world:</p>
+
+    <blockquote>
+      <p>
+        <font face="Arial">bob joins the orchestra without an instrument.<br>
+          the orchestra performs<br>
+          sue gets an instrument from the </font>MIL<sup>2</sup><font face="Arial">
+          and joins the orchestra.<br>
+          ralph gets an instrument from the </font>MIL<sup>2</sup><font face="Arial">.<br>
+          mary gets an instrument from the </font>MIL<sup>2</sup><font face="Arial"> and joins the orchestra.<br>
+          ralph returns his instrument to the </font>MIL<sup>2</sup><font face="Arial">.<br>
+          jody gets an instrument from the </font>MIL<sup>2</sup><font face="Arial"> and joins the orchestra.<br>
+          morgan gets an instrument from the </font>MIL<sup>2</sup><font face="Arial"><br>
+          the orchestra performs.<br>
+          ralph joins the orchestra.<br>
+          the orchestra performs.<br>
+          bob gets an instrument from the </font>MIL<sup>2</sup><font face="Arial"><br>
+          ralph gets an instrument from the </font>MIL<sup>2</sup><font face="Arial"><br>
+          the orchestra performs.<br>
+          morgan joins the orchestra.<br>
+          the orchestra performs.</font></p>
+    </blockquote>
+
+    <p>
+      A programmer would use objects to model this world by calling
+      methods.</p>
+
+    <p>
+      There will most always be an &quot;initialization phase&quot; in
+      which the objects that will be used in the scenario will be
+      created and things that need to be preset are (like there should
+      be a MIL<sup>2</sup> and someone needs to put some instruments
+      in it before the scenario starts). This is done by the modeling
+      programmer before the code for doing the scenario.</p>
+
+    <p>
+      There might be some clean up code after the scenario. In this
+      recitation there isn't.</p>
+
+    <p>
+      What are the additional clases that will need to be created for
+      this scenario?<br>  
+
+      Only orchestra. As noted, we already have the others.</p>
+
+    <p>
+
+      <font face="Arial"><strong>Q:</strong></font><strong> </strong>What
+      additional functionality needs to be added to some of our
+      classes?<br>
+
+      <font face="Arial"><strong>A:</strong></font><strong> </strong>The
+      way to play an instrument &quot;normally.&quot; All
+      instruments <I>must</I> have this ability.</p>
+
+    <p>
+      There are two ways to play an instrument: the normal playing way
+      that musicians use when performing in the orchestra and the
+      making sound way that the MIL<sup>2</sup> uses each morning to
+      test the instruments and that musicians used in part one.  (The
+      MIL<sup>2</sup> could play its instruments in the normal way but
+      it just doesn't.)</p>
+
+    <ul>
+      <li><U>For Normal PLAYing</U><B>:</B>
+        <ul>
+          <li>For trumpets the output should also be:<br>
+            &quot;<font face="Arial">Toot</font>&quot;
+          <li>For trombones the output should also be:<br>
+            &quot;<font face="Arial">Blat</font>&quot;
+          <li>For violins the output should be:<br>
+            &quot;<font face="Arial">Screech&quot;</font>
+          <li>For cellos the output should be:<br>
+            &quot;<font face="Arial">Squawk&quot;</font>
+          <li>For drums the output should be:<br>
+            &quot;<font face="Arial">Boom</font>&quot;
+          <li>For cymbals the output should be:<br>
+            &quot;<font face="Arial">Crash</font>&quot;
+        </ul>
+    </ul>
+
+    <p>
+      How to enforce that every instrument must have a play method?</p>
+
+    <p>
+      How would you model &quot;the orchestra?&quot; - an object that
+      &quot;contains&quot; all the musicians.<br>
+      <!--The orchestra has a maximum size of 25. -removing this in 18F -->
+      Any musician can join the orchestra but she
+      joins for life! It also doesn't matter if a musician doesn't
+      have an instrument when they are in the orchestra.  When the
+      orchestra performs, any musician who doesn't have an instrument
+      just doesn't play their instruments (or should that be
+      stated as: they don't play the instruments that they don't
+      have?!). A musician can go to the MIL<sup>2</sup> and get an
+      instrument and then when the orchestra plays, they play. When
+      the orchestra performs, it just has each of its musicians one at
+      a time play their instrument in the <U>normal</U> way. The order
+      in which the musicians perform doesn't matter as long as all
+      musicians in the orchestra are told to play. You already have a
+      working container for instrument pointers so there shouldn't be
+      too much work to modify that code to instead
+      contain <font face="Courier New">Musician*</font>'s.</p>
+
+    <p>GO!</p>
+
+    <p>
+      Here's <A HREF="cs1124-rec10-PART-TWO.cpp">the sample code for the scenario</A> 
+      given above.<br>
+      Here's <A HREF="orchOutput.txt">the output from this scenario</A> being run.<br>
+      Make some of your own scenarios (or add to this one) too.</p>
+    <hr>
+</body>
