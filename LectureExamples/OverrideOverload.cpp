@@ -26,11 +26,13 @@ void otherFunc(Parent& base) {
 int main() {
     Parent parent;
     func(parent);
+
     Child child;
     func(child);
+
     Grandchild gc;
     func(gc);  // both func() are available, the compilor would select the most
                // specific one! (the smaller set of input)
 
-    otherFunc(child);
+    otherFunc(child);  // output: func(Parent); Child::bar();
 }

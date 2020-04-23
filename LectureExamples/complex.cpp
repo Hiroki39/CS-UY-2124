@@ -21,13 +21,13 @@ public:
         return *this;
     }
 
-    // ++c1
+    // ++c1 (pre-increment)
     // c1.operator++();
     Complex& operator++() {
         ++real;
         return *this;
     }
-    // c1++
+    // c1++ (post-increment)
     // c1.operator++(0);
     Complex operator++(int dummy) {
         Complex original(*this);

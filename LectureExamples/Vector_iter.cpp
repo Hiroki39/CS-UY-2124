@@ -11,6 +11,45 @@ using namespace std;
 
 class Vector {
 public:
+    class Iterator {
+        // non-member
+        friend bool operator!=(const Iterator& lhs, const Iterator& rhs) {
+            return lhs.valPtr != rhs.valPtr;
+        }
+
+    public:
+        Iterator(int* p) : valPtr(p) {}
+        Iterator& operator++() {  // ++iter
+            valPtr++;
+            return *this;
+        }
+        // dereference operator
+        int& operator*() { return *valPtr; }
+
+    private:
+        int* valPtr;
+    };
+
+    class Const_Iterator {
+        // non-member
+        friend bool operator!=(const Const_Iterator& lhs,
+                               const Const_Iterator& rhs) {
+            return lhs.valPtr != rhs.valPtr;
+        }
+
+    public:
+        Const_Iterator(int* p) : valPtr(p) {}
+        Const_Iterator& operator++() {  // ++iter
+            valPtr++;
+            return *this;
+        }
+        // dereference operator
+        const int& operator*() { return *valPtr; }
+
+    private:
+        int* valPtr;
+    };
+
     Vector() : theSize(0), theCapacity(8), data(new int[theCapacity]) {}
     // Vector(size_t size, int value = 0) {}
     ~Vector() {
@@ -76,15 +115,11 @@ public:
 
     // overload begin() and end() with const and non-const version
 
-    int* begin() { return data; }
-    int* end() { return data + theSize; }
+    Iterator begin() { return Iterator(data); }
+    Iterator end() { return Iterator(data + theSize); }
 
-    const int* begin() const { return data; }
-    const int* end() const { return data + theSize; }
-
-    // bad version
-    // int* begin() const { return data; }
-    // int* end() const { return data + theSize; }
+    Const_Iterator begin() const { return Const_Iterator(data); }
+    Const_Iterator end() const { return Const_Iterator(data + theSize); }
 
 private:
     size_t theSize;  // C++ does not allow to have field & method with same name
@@ -98,6 +133,7 @@ void printVec(const Vector& v) {
                          // begin() and end() method
         cout << val << " ";
     }
+    cout << "]" << endl;
 }
 
 int main() {
@@ -123,17 +159,17 @@ int main() {
     }
     cout << endl;
     // equivalent to
-    // for (const int* p = v.begin(); p != v.end(); ++p) {
-    //     int temp = *p;
-    //     cout << temp << ' ';
-    // }
-    // cout << endl;
+    for (Vector::Iterator iter = v2.begin(); iter != v2.end(); ++iter) {
+        int temp = *iter;
+        cout << temp << ' ';
+    }
+    cout << endl;
 
     for (int& val : v2) {
         val += 2;
     }
     // equivalent to
-    for (int* p = v2.begin(); p != v2.end(); ++p) {
-        *p += 2;
+    for (Vector::Iterator iter = v2.begin(); iter != v2.end(); ++iter) {
+        *iter += 2;
     }
 }
