@@ -38,6 +38,7 @@ namespace WarriorCraft {
     class Warrior : public Protector {
     public:
         using Protector::Protector;
+        void defend() const override;
     };  // class Warrior
 
     class Wizard : public Protector {

@@ -60,7 +60,7 @@ namespace WarriorCraft {
     int Lord::getStrength() const {
         // sum up strengths of all the Warriors in the army and return
         int total_strength = 0;
-        for (Protector* const& curr_ptr : army) {
+        for (Protector* curr_ptr : army) {
             total_strength += curr_ptr->getStrength();
         }
         return total_strength;

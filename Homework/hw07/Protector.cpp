@@ -34,20 +34,23 @@ namespace WarriorCraft {
         return false;  // fail if the Protector is not removed from the army
     }
 
+    void Warrior::defend() const {
+        cout << getName() << " says: Take that in the name of my lord, "
+             << getLord()->getName() << endl;
+    }
+
     // Wizard Implementation Code
     void Wizard::defend() const { cout << "POOF!" << endl; }
 
     // Archer Implementation Code
     void Archer::defend() const {
-        cout << "TWANG! " << getName()
-             << " says: Take that in the name of my lord, "
-             << getLord()->getName() << endl;
+        cout << "TWANG! ";
+        Warrior::defend();
     }
 
     // Archer Implementation Code
     void Swordsman::defend() const {
-        cout << "CLANG! " << getName()
-             << " says: Take that in the name of my lord, "
-             << getLord()->getName() << endl;
+        cout << "CLANG! ";
+        Warrior::defend();
     }
 }  // namespace WarriorCraft
