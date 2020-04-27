@@ -1,6 +1,9 @@
-// Doubly linked list
-// Test code
-
+/*
+    rec12.cpp
+    Sec C, Apr 24, 2020
+    Hongyi Zheng
+    Doubly Linked List
+*/
 #include <cstdlib>
 #include <iostream>
 using namespace std;

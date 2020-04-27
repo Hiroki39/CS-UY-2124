@@ -4,7 +4,6 @@ project (LectureExamples)
 
 add_compile_options(-Wall -std=c++14 -g)
 
-
 # Find all cpp files and store in list mains
 file(GLOB mains RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 foreach(mainfile IN LISTS mains)
