@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <list>
+#include <utility>
 #include <vector>
 using namespace std;
 
@@ -26,19 +27,21 @@ Fred myFind(Fred start, Fred stop, Mary target) {
 template <typename Fred, typename Predicate>
 Fred myFind_if(Fred start, Fred stop, Predicate pred) {
     for (Fred p = start; p != stop; ++p) {
-        if (pred(*p)) {
+        if (pred(*p)) {  // if (pred(*p) == true)
             return p;
         }
     }
     return stop;
 }
 
-bool isEven(int n) {
+bool isEven(int n) {  // Predicate
     // return n % 2 == 0;
     return (n & 1) == 0;  // bitwise operation! (faster)
 }
 
 // Functor
+// struct IsEven
+// functor is more efficient
 class IsEven {
 public:
     bool operator()(int n) { return (n & 1) == 0; }
@@ -52,6 +55,13 @@ public:
 private:
     int divisor;
 };
+
+// pair<int, string> foo() {
+//     pair<int, string> result(42, "theanswer");
+//     return result;
+// }
+
+auto foo() { return make_pair(42, "theanswer"); }
 
 int main() {
     char bjarne[] = "Bjarne Stroustrup";
@@ -98,12 +108,23 @@ int main() {
     vector<int>::iterator loc7 = find_if(vi.begin(), vi.end(), IsEven());
 
     IsMultiple multipleOf7(7);
-    loc7 = find_if(vi.begin(), vi.end(), multipleOf7);
+    // loc7 = find_if(vi.begin(), vi.end(), multipleOf7);
     // equivalent to
     loc7 = find_if(vi.begin(), vi.end(), IsMultiple(7));
 
     // lambda expression
-    loc7 = find_if(vi.begin(), vi.end(), [](int n) { return n % 2 == 0; });
+    // loc7 = find_if(vi.begin(), vi.end(), [](int n) -> bool { return n % 2 ==
+    // 0; });
+    loc7 = find_if(vi.begin(), vi.end(),
+                   [](int n) { return n % 2 == 0; });  // a functor is created
 
-    auto loc8 = find_if(vi.begin(), vi.end(), [](int n) { return n % 2 == 0; });
+    // automtically determine the type of loc8
+    auto loc8 =
+        find_if(vi.begin(), vi.end(), [](int n) { return (n & 1) == 0; });
+
+    auto iamalambda = [] { cout << "I am a lambda\n"; };  // no parameter list!
+
+    // pair<int, string> val = foo();
+    auto val = foo();
+    cout << val.first << " " << val.second << endl;
 }

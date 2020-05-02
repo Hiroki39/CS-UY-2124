@@ -6,11 +6,13 @@
 
 namespace Algebra {
 
-    struct Term;
-
     class Polynomial {
-        // non-member friend operators
-        friend std::ostream operator<<(std::ostream& os, const Polynomial& rhs);
+        struct Term;
+
+        // non-member friend functions
+        friend void printTerm(Polynomial::Term* termptr, int degree);
+        friend std::ostream& operator<<(std::ostream& os,
+                                        const Polynomial& rhs);
         friend bool operator==(const Polynomial& lhs, const Polynomial& rhs);
 
     public:
@@ -23,11 +25,14 @@ namespace Algebra {
         Polynomial& operator+=(const Polynomial& rhs);
         Polynomial& operator=(const Polynomial& rhs);
 
+        // add/delete Terms
         void addLowestTerm(int data);
+        Polynomial::Term* addHighestTerm(int data, Term* curr_highest);
+        void clearLeadingZeroes();
+        void clearPolynomial(Term* curr_term);
 
-        int eval(int val) const;
-
-        void clearPolynomial(Term* startpoint);
+        // evaluation
+        int evaluate(int val) const;
 
         // destructor
         ~Polynomial();

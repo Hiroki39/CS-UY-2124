@@ -129,6 +129,11 @@ Node* listCopy(Node* headPtr) {
     return result;
 }
 
+Node* listCopyR(Node* headPtr) {
+    if (headPtr == nullptr) return nullptr;  // edge case
+    return new Node(headPtr->data, listCopyR(headPtr->next));
+}
+
 int main() {
     Node* myList = nullptr;
     listDisplay(myList);
