@@ -134,6 +134,22 @@ Node* listCopyR(Node* headPtr) {
     return new Node(headPtr->data, listCopyR(headPtr->next));
 }
 
+void listPrint(Node* p) {
+    if (p == nullptr) return;
+    cout << p->data << ' ';
+    listPrint(p->next);  // tail recursion
+}
+
+int listLengthR(Node* p) {
+    if (p == nullptr) return 0;
+    return listLength(p->next) + 1;  // NOT tail recursion
+}
+
+int listLengthTail(Node* p, int len = 0) {
+    if (p == nullptr) return len;
+    return listLengthTail(p->next, len + 1);  // tail recursion
+}  // get around the limitation of the compilers!
+
 int main() {
     Node* myList = nullptr;
     listDisplay(myList);

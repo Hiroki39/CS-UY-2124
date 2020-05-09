@@ -1,3 +1,9 @@
+/*
+    hw08.cpp
+    Sec C, May 4, 2020
+    Hongyi Zheng
+    The Polynomial Class
+*/
 #include "Polynomial.hpp"
 using namespace std;
 
