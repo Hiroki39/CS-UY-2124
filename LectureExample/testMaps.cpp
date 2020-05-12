@@ -44,7 +44,7 @@ int main() {
     mfi[Foo("mary", 28)] = -42;
     for (const auto& p : mfi) cout << p.first << " " << p.second << endl;
 
-    cerr << "for (pair<const Foo&, int&>& p : mfi)\n";
+    cerr << "for (pair<const Foo, int>& p : mfi)\n";
     for (pair<const Foo, int>& p : mfi) p.second += 1;
     for (const auto& p : mfi) cout << p.first << " " << p.second << endl;
 }

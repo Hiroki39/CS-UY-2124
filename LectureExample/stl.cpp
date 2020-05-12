@@ -36,6 +36,10 @@ Fred myFind_if(Fred start, Fred stop, Predicate pred) {
 
 bool isEven(int n) {  // Predicate
     // return n % 2 == 0;
+
+    // 5 == 101
+    // 4 == 100
+    // 5 & 1 = 101&001 == 001 == 1
     return (n & 1) == 0;  // bitwise operation! (faster)
 }
 
@@ -61,7 +65,7 @@ private:
 //     return result;
 // }
 
-auto foo() { return make_pair(42, "theanswer"); }
+auto foo() { return make_pair(42, "the answer"); }
 
 int main() {
     char bjarne[] = "Bjarne Stroustrup";
@@ -93,6 +97,7 @@ int main() {
         char c = *iter;
         cout << c << ' ';
     }
+    cout << endl;
 
     char* loc5 = find(bjarne, bjarne + len, 'S');
     loc5 = myFind(bjarne, bjarne + len, 'S');
@@ -127,4 +132,10 @@ int main() {
     // pair<int, string> val = foo();
     auto val = foo();
     cout << val.first << " " << val.second << endl;
+
+    int* arrInt = new int[10];
+    for (int i = 0; i < 10; ++i) {
+        arrInt[i] = i * i;
+    }
+    cout << myFind(arrInt, arrInt + 10, 49) << endl;
 }

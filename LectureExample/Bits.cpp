@@ -1,10 +1,3 @@
-/*
-    filename.cpp
-    Sec C, May 6, 2020
-    Hongyi Zheng
-    <|Introduction>
-*/
-
 #include <iostream>
 using namespace std;
 
