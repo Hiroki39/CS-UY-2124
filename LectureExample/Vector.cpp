@@ -123,11 +123,11 @@ int main() {
     }
     cout << endl;
     // equivalent to
-    // for (const int* p = v.begin(); p != v.end(); ++p) {
-    //     int temp = *p;
-    //     cout << temp << ' ';
-    // }
-    // cout << endl;
+    for (const int* p = v.begin(); p != v.end(); ++p) {
+        int temp = *p;
+        cout << temp << ' ';
+    }
+    cout << endl;
 
     for (int& val : v2) {
         val += 2;

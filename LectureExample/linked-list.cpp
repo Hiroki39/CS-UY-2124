@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 
 struct Node {
@@ -92,9 +93,10 @@ void listAddTail(Node*& headPtr, int data) {
     }
 }
 
-void listRemoveTail(Node*& headPtr, int data) {
+void listRemoveTail(Node*& headPtr) {
     // handle edge cases
     if (headPtr == nullptr) {
+        throw exception();
     } else if (headPtr->next == nullptr) {  // a single node
         delete headPtr;
         headPtr = nullptr;
@@ -150,6 +152,22 @@ int listLengthTail(Node* p, int len = 0) {
     return listLengthTail(p->next, len + 1);  // tail recursion
 }  // get around the limitation of the compilers!
 
+void removeValue(Node* currPtr, int val, Node* prior = nullptr) {
+    if (!currPtr) return;  // reach the end of the List
+    if (currPtr->data == val) {
+        Node* second = currPtr->next;
+        delete currPtr;
+        currPtr = second;
+        if (prior) {
+            prior->next = currPtr;
+        }
+    } else {
+        prior = currPtr;
+        currPtr = currPtr->next;
+    }
+    removeValue(currPtr, val, prior);
+}
+
 int main() {
     Node* myList = nullptr;
     listDisplay(myList);
@@ -163,4 +181,20 @@ int main() {
         cout << p->data << ' ';
     }
     cout << endl;
+
+    Node* myList2 = nullptr;
+    try {
+        listRemoveTail(myList2);
+    } catch (exception& ex) {
+        cout << "exception " << ex.what() << endl;
+    }
+
+    listAddHead(myList2, 5);
+    listAddHead(myList2, 2);
+    listAddHead(myList2, 3);
+    listAddHead(myList2, 2);
+    listAddHead(myList2, 2);
+    listAddHead(myList2, 7);
+    removeValue(myList2, 2);
+    listPrint(myList2);
 }

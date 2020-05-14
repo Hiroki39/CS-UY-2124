@@ -8,7 +8,7 @@ long long fib(int n) {
 
 int main() {
     for (size_t i = 0; i < 100; i++) {
-        cout.imbue(std::locale(""));
+        cout.imbue(locale(""));
         cout << "fib(" << i << "): " << fib(i) << endl;
     }
 }

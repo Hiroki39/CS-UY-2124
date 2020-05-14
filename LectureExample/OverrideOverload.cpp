@@ -5,10 +5,12 @@ class Parent {
 public:
     virtual void bar() { cout << "Parent::bar()" << endl; }
 };
+
 class Child : public Parent {
 public:
     void bar() { cout << "Child::bar()" << endl; }
 };
+
 class Grandchild : public Child {
 public:
     void bar() { cout << "Grandchild::bar()" << endl; }
@@ -25,14 +27,16 @@ void otherFunc(Parent& base) {
 
 int main() {
     Parent parent;
-    func(parent);
+    func(parent);  // func(Parent)
 
     Child child;
-    func(child);
+    func(child);  // func(Child)
 
     Grandchild gc;
-    func(gc);  // both func() are available, the compilor would select the most
-               // specific one! (the smaller set of input)
+    // both func() are available, the compilor would select the most specific
+    // one! (the smaller set of input)
+    func(gc);  // func(Child)
 
-    otherFunc(child);  // output: func(Parent); Child::bar();
+    otherFunc(child);  // output: func(Parent);
+                       // Child::bar();
 }

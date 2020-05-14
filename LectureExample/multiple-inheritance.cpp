@@ -17,7 +17,7 @@ public:
 class Bat : public Animal, public Flier {
 public:
     void fly() {
-        cout << "Flap...flap";
+        cout << "Flap...flap ";
         Flier::fly();
     }
 };
@@ -25,14 +25,17 @@ public:
 class Insect : public Animal, public Flier {
 public:
     void fly() {
-        cout << "Bzzzz.";
+        cout << "Bzzzz. ";
         Flier::fly();
     }
 };
 
 class Plane : public Flier {
 public:
-    void fly() { cout << "vrooommmmm!"; }
+    void fly() {
+        cout << "vrooommmmm! ";
+        Flier::fly();
+    }
 };
 
 class Person {
@@ -65,7 +68,10 @@ class TA : public Student, public Instructor {
 public:
     // TA() : Student(), Instructor() {}
     TA(const string& name) : Student(name), Instructor(name) {}
-    using Student::display;
+    void display() const override {
+        Student::display();
+        cout << "I am a TA\n";
+    }
 };
 
 int main() {
@@ -86,5 +92,5 @@ int main() {
 
     TA rohit("rohit");
     // rohit.display();
-    rohit.Student::display();
+    rohit.display();
 }

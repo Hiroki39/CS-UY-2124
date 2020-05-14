@@ -20,6 +20,7 @@ private:
 class Cat : public Pet {
 public:
     // Cat(const string& name) : name(name) {}
+    // Using Pet::Pet
     Cat(const string& name) : Pet(name) {}
     // void eat() { cout << "Cat eating" << endl; }
     void eat() override {

@@ -20,5 +20,6 @@ int main() {
 
     thread t2(threadFunc);
     t2.join();
+
     cout << "glob = " << glob << endl;
 }

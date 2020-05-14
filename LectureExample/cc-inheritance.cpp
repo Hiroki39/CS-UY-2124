@@ -5,7 +5,9 @@ class Base {
 public:
     Base() { cerr << "Base()\n"; }
     Base(const Base& rhs) { cerr << "Base(const Base&)\n"; }
+
     virtual ~Base() { cerr << "~Base()\n"; }
+
     Base& operator=(const Base& rhs) {
         cerr << "Base::operator=(const Base&)\n";
         return *this;
@@ -16,7 +18,9 @@ class Member {
 public:
     Member() { cerr << "Member()\n"; }
     Member(const Member& rhs) { cerr << "Member(const Member&)\n"; }
+
     virtual ~Member() { cerr << "~Member()\n"; }
+
     Member& operator=(const Member& rhs) {
         cerr << "Member::operator=(const Member&)\n";
         return *this;
@@ -55,32 +59,32 @@ int main() {
     Derived der;
     cout << "===\n";
 
-    // cerr << "Derived der2(der);\n"
-    //      << "--------\n";
-    // Derived der2(der);
-    // cout << "===\n";
-    //
-    // cerr << "Derived der3 = der;\n"
-    //      << "--------\n";
-    // Derived der3 = der;
-    // cout << "===\n";
-    //
-    // cerr << "der = der2;\n"
-    //      << "--------\n";
-    // der = der2;
-    // cout << "===\n";
-    //
-    // cerr << "Derived* p = new Derived();\n"
-    //      << "delete p;\n"
-    //      << "--------\n;";
-    // Derived* p = new Derived();
-    // delete p;
-    // cout << "===\n";
-    //
-    // cerr << "Base* bp = new Derived();\n"
-    //      << "delete p;\n"
-    //      << "--------\n";
-    // Base* bp = new Derived();
-    // delete bp;
-    // cout << "===\n";
+    cerr << "Derived der2(der);\n"
+         << "--------\n";
+    Derived der2(der);
+    cout << "===\n";
+
+    cerr << "Derived der3 = der;\n"
+         << "--------\n";
+    Derived der3 = der;
+    cout << "===\n";
+
+    cerr << "der = der2;\n"
+         << "--------\n";
+    der = der2;
+    cout << "===\n";
+
+    cerr << "Derived* p = new Derived();\n"
+         << "delete p;\n"
+         << "--------\n";
+    Derived* p = new Derived();
+    delete p;
+    cout << "===\n";
+
+    cerr << "Base* bp = new Derived();\n"
+         << "delete bp;\n"
+         << "--------\n";
+    Base* bp = new Derived();
+    delete bp;
+    cout << "===\n";
 }

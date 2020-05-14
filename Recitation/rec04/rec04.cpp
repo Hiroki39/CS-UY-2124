@@ -136,31 +136,32 @@ int main() {
     // p = pD;
 
     int joe = 24;
-    // const int sal = 19;
+    const int sal = 19;
     int* pI;
     pI = &joe;
     *pI = 234;
     // pI = &sal;
     // *pI = 7623;
 
-    // const int *pcI;
-    // pcI = &joe;
+    const int* pcI;
+    pcI = &joe;
     // *pcI = 234;
-    // pcI = &sal;
+    pcI = &sal;
     // *pcI = 7623;
 
     // int* const cpI;
     int* const cpI(&joe);
-    // int *const cpI(&sal);
+    // int* const cpI(&sal);
     // cpI = &joe;
     *cpI = 234;
     // cpI = &sal;
     *cpI = 7623;
 
     // const int* const cpcI;
-    // const int *const cpcI(&joe);
+    const int* const cpcI(&joe);
     // const int* const cpcI(&sal);
-    // cpcI = &joe;  // *cpcI = 234;
+    // cpcI = &joe;
+    // *cpcI = 234;
     // cpcI = &sal;
     // *cpcI = 7623;
     Complex c = {11.23, 45.67};
@@ -179,26 +180,33 @@ int main() {
     cout << "The " << *pDyn << " is stored at address " << pDyn
          << " which is in the heap\n";
     cout << pDyn << endl;
+
     delete pDyn;
+
     cout << pDyn << endl;
     cout << "The 17 might STILL be stored at address " << pDyn
          << " even though we deleted pDyn\n";
     cout << "But can we dereference pDyn?  We can try.  This might crash... "
          << *pDyn << ".  Still here?\n";
+
     pDyn = nullptr;
-    // double *pDouble = nullptr;
-    // cout << "Can we dereference nullptr?  " << *pDyn << endl;
+    double* pDouble = nullptr;
+
+    // cout << "Can we dereference nullptr?  " << *pDyn << endl; NOOOOOO!
     // cout << "Can we dereference nullptr?  " << *pDouble << endl;
+
     double* pTest = new double(12);
     delete pTest;
     pTest = nullptr;
     delete pTest;  // safe
+
     short* pShrt = new short(5);
     delete pShrt;
     // delete pShrt;
-    // long jumper = 12238743;
+
+    long jumper = 12238743;
     // delete jumper;
-    // long *ptrTolong = &jumper;
+    long* ptrTolong = &jumper;
     // delete ptrTolong;
     // Complex cmplx;
     // delete cmplx;

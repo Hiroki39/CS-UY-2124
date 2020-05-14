@@ -22,7 +22,7 @@ void spin() {
     }
 }
 
-int main(int argc, char** argv) {  // accepting input
+int main(int argc, char** argv) {  // Accepting Input
     // Initialize
     if (argc != 2) {
         cerr << "Usage: " << argv[0] << "fibIndex\n";
