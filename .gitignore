@@ -1,8 +1,9 @@
 *
 !*.*
 !*/
-/*.txt
+*.txt
 *.pdf
+!Exams/*.pdf
 
 ##### Windows
 # Windows thumbnail cache files
