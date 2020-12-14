@@ -31,10 +31,10 @@ public:
       int month, day, year;
     };
     */
-    /*
-      constructor
-      const makes it possible to accept literals and protect the input variables
-    */
+
+    // constructor
+    // "const" makes it possible to accept literals and protect the input
+    // variables
     Person(const string& theName, int m, int d, int y)
         : name(theName), dob(m, d, y) {}
 

@@ -98,6 +98,7 @@ void printVec(const Vector& v) {
                          // begin() and end() method
         cout << val << " ";
     }
+    cout << "]" << endl;
 }
 
 int main() {
