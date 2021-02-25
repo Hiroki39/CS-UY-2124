@@ -4,6 +4,8 @@
 *.txt
 *.pdf
 !Exams/*.pdf
+.cmake
+.vscode
 
 ##### Windows
 # Windows thumbnail cache files
